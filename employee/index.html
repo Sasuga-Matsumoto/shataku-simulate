@@ -1204,23 +1204,18 @@ function formatMan(n) { return (Math.round(n / 10000 * 10) / 10).toFixed(1); }
 // Bar chart rendering
 function renderBars(result, rent, monthlySalary) {
   var w = result.without, s = result.withSystem;
-  var taxMonthlyW = Math.round(w.totalSI / 12) + Math.round(w.residentTax / 12) + Math.round(w.incomeTax / 12);
-  var taxMonthlyS = Math.round(s.totalSI / 12) + Math.round(s.residentTax / 12) + Math.round(s.incomeTax / 12);
-  var reduction   = Math.round(rent * 0.8);
-  var rentS       = Math.round(rent * 0.2);
-  var realW       = Math.round(w.realNetMonthly);
-  var realS       = Math.round(s.realNetMonthly);
-  function toPct(n) { return Math.max(1, Math.round(n / monthlySalary * 100)); }
+  var taxW = monthlySalary - rent - w.realNetMonthly;
+  var taxS = monthlySalary - rent - s.realNetMonthly;
   var leftSegs = [
-    { cls: 'seg-tax',     label: '税金・社保', sub: formatMan(taxMonthlyW) + '万円', pct: toPct(taxMonthlyW) },
-    { cls: 'seg-rent',    label: '家賃',       sub: formatMan(rent) + '万円',        pct: toPct(rent) },
-    { cls: 'seg-realnet', label: '実質手取り', sub: formatMan(realW) + '万円',       pct: 100 - toPct(taxMonthlyW) - toPct(rent) }
+    { cls: 'seg-tax',     label: '税金・社保', sub: formatMan(Math.max(0, taxW)) + '万円', pct: 20 },
+    { cls: 'seg-rent',    label: '家賃',       sub: formatMan(rent) + '万円',             pct: 30 },
+    { cls: 'seg-realnet', label: '実質手取り', sub: formatMan(w.realNetMonthly) + '万円', pct: 50 }
   ];
   var rightSegs = [
-    { cls: 'seg-reduction', label: '給与減額',        sub: formatMan(reduction) + '万円', note: '（家賃の80%）', pct: toPct(reduction) },
-    { cls: 'seg-tax',       label: '税金・社保',       sub: formatMan(taxMonthlyS) + '万円',                    pct: toPct(taxMonthlyS) },
-    { cls: 'seg-rent',      label: '家賃（20%）',      sub: formatMan(rentS) + '万円',                          pct: toPct(rentS) },
-    { cls: 'seg-realnet',   label: '実質手取り',       sub: formatMan(realS) + '万円',                          pct: 100 - toPct(reduction) - toPct(taxMonthlyS) - toPct(rentS) }
+    { cls: 'seg-reduction', label: '給与減額',         sub: formatMan(rent * 0.8) + '万円', note: '（賃料の80%）', pct: 22 },
+    { cls: 'seg-tax',       label: '税金・社保',        sub: formatMan(Math.max(0, taxS)) + '万円',              pct: 13 },
+    { cls: 'seg-rent',      label: '家賃（賃料の20%）', sub: formatMan(rent * 0.2) + '万円',                     pct: 8  },
+    { cls: 'seg-realnet',   label: '実質手取り',        sub: formatMan(s.realNetMonthly) + '万円',               pct: 57 }
   ];
   buildBar(document.getElementById('bar-left'),  leftSegs);
   buildBar(document.getElementById('bar-right'), rightSegs);
