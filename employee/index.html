@@ -1153,20 +1153,13 @@ function calcIncomeTaxBracket(t) {
 }
 function calcScenario(monthlySalary, rent, reductionRatio, healthRate) {
   var effectiveMonthly = monthlySalary - rent * reductionRatio;
-  var bonus = monthlySalary;
-  var annualIncome = effectiveMonthly * 12 + bonus;
+  var annualIncome = effectiveMonthly * 12;
   var stdMonthly = lookupStandardMonthly(effectiveMonthly);
   var healthMonthly = Math.min(stdMonthly, HEALTH_CAP_MONTHLY) * healthRate * 0.5;
   var pensionMonthly = Math.min(stdMonthly, PENSION_CAP_MONTHLY) * PENSION_RATE_HALF;
   var employmentMonthly = effectiveMonthly * EMPLOYMENT_RATE;
   var siMonthly = healthMonthly + pensionMonthly + employmentMonthly;
-  var healthBonusBase = Math.min(bonus, HEALTH_BONUS_CAP);
-  var healthBonus = healthBonusBase * healthRate * 0.5;
-  var pensionBonusBase = (bonus >= PENSION_BONUS_CAP_PER) ? PENSION_BONUS_CAP_PER : bonus;
-  var pensionBonus = pensionBonusBase * PENSION_RATE_HALF;
-  var employmentBonus = bonus * EMPLOYMENT_RATE;
-  var siBonus = healthBonus + pensionBonus + employmentBonus;
-  var totalSI = siMonthly * 12 + siBonus;
+  var totalSI = siMonthly * 12;
   var salaryDeduction = calcSalaryDeduction(annualIncome);
   var earnedIncome = annualIncome - salaryDeduction;
   var taxableResident = Math.max(0, earnedIncome - totalSI - RESIDENT_TAX_BASIC_DEDUCTION);
@@ -1211,18 +1204,23 @@ function formatMan(n) { return (Math.round(n / 10000 * 10) / 10).toFixed(1); }
 // Bar chart rendering
 function renderBars(result, rent, monthlySalary) {
   var w = result.without, s = result.withSystem;
-  var taxW = monthlySalary - rent - w.realNetMonthly;
-  var taxS = monthlySalary - rent - s.realNetMonthly;
+  var taxMonthlyW = Math.round(w.totalSI / 12) + Math.round(w.residentTax / 12) + Math.round(w.incomeTax / 12);
+  var taxMonthlyS = Math.round(s.totalSI / 12) + Math.round(s.residentTax / 12) + Math.round(s.incomeTax / 12);
+  var reduction   = Math.round(rent * 0.8);
+  var rentS       = Math.round(rent * 0.2);
+  var realW       = Math.round(w.realNetMonthly);
+  var realS       = Math.round(s.realNetMonthly);
+  function toPct(n) { return Math.max(1, Math.round(n / monthlySalary * 100)); }
   var leftSegs = [
-    { cls: 'seg-tax',     label: '税金・社保',     sub: formatMan(Math.max(0, taxW)) + '万円', pct: 20 },
-    { cls: 'seg-rent',    label: '家賃',           sub: formatMan(rent) + '万円',             pct: 30 },
-    { cls: 'seg-realnet', label: '実質手取り',      sub: formatMan(w.realNetMonthly) + '万円', pct: 50 }
+    { cls: 'seg-tax',     label: '税金・社保', sub: formatMan(taxMonthlyW) + '万円', pct: toPct(taxMonthlyW) },
+    { cls: 'seg-rent',    label: '家賃',       sub: formatMan(rent) + '万円',        pct: toPct(rent) },
+    { cls: 'seg-realnet', label: '実質手取り', sub: formatMan(realW) + '万円',       pct: 100 - toPct(taxMonthlyW) - toPct(rent) }
   ];
   var rightSegs = [
-    { cls: 'seg-reduction', label: '給与減額',         sub: formatMan(rent * 0.8) + '万円', note: '（賃料の80%）', pct: 22 },
-    { cls: 'seg-tax',       label: '税金・社保',        sub: formatMan(Math.max(0, taxS)) + '万円',             pct: 13 },
-    { cls: 'seg-rent',      label: '家賃（賃料の20%）', sub: formatMan(rent * 0.2) + '万円',                    pct: 8  },
-    { cls: 'seg-realnet',   label: '実質手取り',        sub: formatMan(s.realNetMonthly) + '万円',              pct: 57 }
+    { cls: 'seg-reduction', label: '給与減額',        sub: formatMan(reduction) + '万円', note: '（家賃の80%）', pct: toPct(reduction) },
+    { cls: 'seg-tax',       label: '税金・社保',       sub: formatMan(taxMonthlyS) + '万円',                    pct: toPct(taxMonthlyS) },
+    { cls: 'seg-rent',      label: '家賃（20%）',      sub: formatMan(rentS) + '万円',                          pct: toPct(rentS) },
+    { cls: 'seg-realnet',   label: '実質手取り',       sub: formatMan(realS) + '万円',                          pct: 100 - toPct(reduction) - toPct(taxMonthlyS) - toPct(rentS) }
   ];
   buildBar(document.getElementById('bar-left'),  leftSegs);
   buildBar(document.getElementById('bar-right'), rightSegs);
@@ -1245,23 +1243,21 @@ function buildBar(container, segments) {
 function renderDetailTable(result, rent, monthlySalary) {
   var w = result.without, s = result.withSystem;
   var rows = [
-    ['月収(額面)',      formatMan(monthlySalary),           formatMan(s.effectiveMonthly)],
-    ['社会保険料(年)',  formatYen(w.totalSI),               formatYen(s.totalSI)],
-    ['住民税(年)',      formatYen(w.residentTax),           formatYen(s.residentTax)],
-    ['所得税(年)',      formatYen(Math.round(w.incomeTax)), formatYen(Math.round(s.incomeTax))],
-    ['手取り月額',      formatMan(w.netMonthly),            formatMan(s.netMonthly)],
-    ['家賃',           formatMan(rent),                    formatMan(rent * 0.2)],
-    ['実質手取り月額', formatMan(w.realNetMonthly),         formatMan(s.realNetMonthly)]
+    ['月収（額面）',   formatYen(monthlySalary),                     formatYen(Math.round(s.effectiveMonthly))],
+    ['社会保険料',     formatYen(Math.round(w.totalSI / 12)),         formatYen(Math.round(s.totalSI / 12))],
+    ['住民税',         formatYen(Math.round(w.residentTax / 12)),     formatYen(Math.round(s.residentTax / 12))],
+    ['所得税',         formatYen(Math.round(w.incomeTax / 12)),       formatYen(Math.round(s.incomeTax / 12))],
+    ['家賃',           formatYen(rent),                               formatYen(Math.round(rent * 0.2))],
+    ['実質手取り月額', formatYen(Math.round(w.realNetMonthly)),        formatYen(Math.round(s.realNetMonthly))]
   ];
   var html = '<table><thead><tr><th></th><th>今の賃貸</th><th>福利厚生社宅</th></tr></thead><tbody>';
   for (var i = 0; i < rows.length; i++) {
     var r = rows[i];
     var hi = (i === rows.length - 1);
-    var unit = (i === 0) ? '万円' : (i <= 3 ? '円' : '万円');
     html += '<tr' + (hi ? ' class="row-highlight"' : '') + '>';
     html += '<td class="td-label">' + r[0] + '</td>';
-    html += '<td class="td-value">' + r[1] + unit + '</td>';
-    html += '<td class="td-value td-accent">' + r[2] + unit + '</td>';
+    html += '<td class="td-value">' + r[1] + '円</td>';
+    html += '<td class="td-value td-accent">' + r[2] + '円</td>';
     html += '</tr>';
   }
   html += '</tbody></table>';
