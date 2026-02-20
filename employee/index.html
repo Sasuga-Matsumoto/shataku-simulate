@@ -1338,6 +1338,7 @@ var pointerStartX = 0, pointerStartY = 0, isDragging = false;
 var slidesWrapper = document.querySelector('.slides-wrapper');
 
 slidesWrapper.addEventListener('pointerdown', function(e) {
+  if (e.target.closest('.slide-btn, .slide-dot')) return;
   pointerStartX = e.clientX;
   pointerStartY = e.clientY;
   isDragging = true;
