@@ -1212,10 +1212,10 @@ function renderBars(result, rent, monthlySalary) {
     { cls: 'seg-realnet', label: '実質手取り', sub: formatMan(w.realNetMonthly) + '万円', pct: 50 }
   ];
   var rightSegs = [
-    { cls: 'seg-reduction', label: '給与減額',         sub: formatMan(rent * 0.8) + '万円', note: '（賃料の80%）', pct: 22 },
-    { cls: 'seg-tax',       label: '税金・社保',        sub: formatMan(Math.max(0, taxS)) + '万円',              pct: 13 },
-    { cls: 'seg-rent',      label: '家賃（賃料の20%）', sub: formatMan(rent * 0.2) + '万円',                     pct: 8  },
-    { cls: 'seg-realnet',   label: '実質手取り',        sub: formatMan(s.realNetMonthly) + '万円',               pct: 57 }
+    { cls: 'seg-reduction', label: '給与減額',         sub: formatMan(rent * 0.8) + '万円', note: '（賃料の80%）', pct: 21 },
+    { cls: 'seg-tax',       label: '税金・社保',        sub: formatMan(Math.max(0, taxS)) + '万円',              pct: 11 },
+    { cls: 'seg-rent',      label: '家賃（賃料の20%）', sub: formatMan(rent * 0.2) + '万円',                     pct: 12 },
+    { cls: 'seg-realnet',   label: '実質手取り',        sub: formatMan(s.realNetMonthly) + '万円',               pct: 56 }
   ];
   buildBar(document.getElementById('bar-left'),  leftSegs);
   buildBar(document.getElementById('bar-right'), rightSegs);
