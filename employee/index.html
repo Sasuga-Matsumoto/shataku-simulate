@@ -72,6 +72,7 @@
 
     /* ===== Section common ===== */
     .section { padding: 64px 20px; }
+    .section-offscreen { content-visibility: auto; contain-intrinsic-size: 0 600px; }
     .inner { max-width: 800px; margin: 0 auto; }
     .section-label {
       font-family: 'IBM Plex Sans', sans-serif;
@@ -960,7 +961,7 @@
   </section>
 
   <!-- 3. Benefits -->
-  <section class="section benefits">
+  <section class="section benefits section-offscreen">
     <div class="inner">
       <div class="section-label">メリット</div>
       <h2 class="section-title">3つのメリット</h2>
@@ -987,7 +988,7 @@
   </section>
 
   <!-- 4. Slides (image carousel: 17 slides from PPTX) -->
-  <section class="section slides-section">
+  <section class="section slides-section section-offscreen">
     <div class="inner">
       <div class="section-label">しくみをざっくり理解</div>
       <h2 class="section-title">1分でわかる<br>福利厚生社宅</h2>
@@ -1023,7 +1024,7 @@
   </section>
 
   <!-- 5. Simulator (GAS-equivalent: salary + rent + prefecture → bar chart + table) -->
-  <section class="section simulator">
+  <section class="section simulator section-offscreen">
     <div class="inner">
       <div class="section-label">手取りシミュレーター</div>
       <h2 class="section-title">あなたの手取り増加を<br>計算してみよう</h2>
@@ -1119,7 +1120,7 @@
   </section>
 
   <!-- 6. Testimonials -->
-  <section class="section testimonials">
+  <section class="section testimonials section-offscreen">
     <div class="inner">
       <div class="section-label">ユーザーボイス</div>
       <h2 class="section-title">利用者の声</h2>
@@ -1144,7 +1145,7 @@
   </section>
 
   <!-- 7. Flow -->
-  <section class="section flow-section">
+  <section class="section flow-section section-offscreen">
     <div class="inner">
       <div class="section-label">申込みの流れ</div>
       <h2 class="section-title">4ステップで完了</h2>
@@ -1183,7 +1184,7 @@
   </section>
 
   <!-- 8. Mechanism -->
-  <section class="section mechanism">
+  <section class="section mechanism section-offscreen">
     <div class="inner">
       <div class="section-label">福利厚生社宅のしくみ</div>
       <h2 class="section-title">手取りアップの仕組み</h2>
@@ -1194,7 +1195,7 @@
   </section>
 
   <!-- 9. FAQ -->
-  <section class="section faq-section">
+  <section class="section faq-section section-offscreen">
     <div class="inner">
       <div class="section-label">よくある質問</div>
       <h2 class="section-title">FAQ</h2>
@@ -1228,7 +1229,7 @@
   </section>
 
   <!-- 10. Demerits -->
-  <section class="section demerits">
+  <section class="section demerits section-offscreen">
     <div class="inner">
       <div class="section-label" style="color:#999;">注意事項</div>
       <h2 class="section-title" style="color:#555;">注意事項</h2>
@@ -1322,7 +1323,8 @@ var RESIDENT_TAX_BASIC_DEDUCTION = 430000;
 function lookupStandardMonthly(salary) {
   if (salary <= 0) return REMUNERATION_TABLE[0][0];
   for (var i = 0; i < REMUNERATION_TABLE.length; i++) {
-    if (salary >= REMUNERATION_TABLE[i][1] && salary < REMUNERATION_TABLE[i][2]) return REMUNERATION_TABLE[i][0];
+    var row = REMUNERATION_TABLE[i];
+    if (salary >= row[1] && salary < row[2]) return row[0];
   }
   return REMUNERATION_TABLE[REMUNERATION_TABLE.length - 1][0];
 }
