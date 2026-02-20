@@ -27,10 +27,6 @@
     }
 
     /* ===== Reset & Base ===== */
-    html { scroll-behavior: smooth; }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-    }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif;
@@ -38,7 +34,6 @@
       color: var(--text);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      font-feature-settings: "kern" 1;
     }
 
     /* ===== Scroll fade-in ===== */
@@ -57,31 +52,36 @@
     .inner { max-width: 800px; margin: 0 auto; }
     .section-label {
       font-family: 'IBM Plex Sans', sans-serif;
-      display: inline-block;
-      font-size: 0.68rem;
+      font-size: 0.7rem;
       font-weight: 700;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--bright-blue);
-      background: rgba(51,102,255,0.07);
-      border: 1px solid rgba(51,102,255,0.15);
-      padding: 5px 14px;
-      border-radius: 100px;
-      margin-bottom: 18px;
+      margin-bottom: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 2px;
+      background: var(--bright-blue);
+      border-radius: 2px;
     }
     .section-title {
-      font-size: 1.7rem;
+      font-size: 1.6rem;
       font-weight: 900;
-      color: var(--text);
-      line-height: 1.22;
-      margin-bottom: 16px;
-      letter-spacing: -0.02em;
+      color: var(--dark-blue);
+      line-height: 1.25;
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
     }
     .section-desc {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: var(--text-light);
       line-height: 1.8;
-      max-width: 560px;
     }
 
     /* ===== 1. Header ===== */
@@ -130,23 +130,24 @@
     .hero::before {
       content: '';
       position: absolute;
-      top: -160px; right: -160px;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(99,102,241,0.22) 0%, transparent 65%);
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 28px 28px;
       pointer-events: none;
     }
     .hero::after {
       content: '';
       position: absolute;
-      bottom: -120px; left: -100px;
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(14,165,233,0.15) 0%, transparent 65%);
+      top: -120px; right: -120px;
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(51,102,255,0.3) 0%, transparent 65%);
       pointer-events: none;
     }
     .hero-glow {
       position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 60%, rgba(15,23,42,0.25) 100%);
+      bottom: -100px; left: -80px;
+      width: 340px; height: 340px;
+      background: radial-gradient(circle, rgba(164,194,244,0.15) 0%, transparent 65%);
       pointer-events: none;
     }
     .hero-title {
@@ -160,12 +161,12 @@
       color: white;
     }
     .hero-title .sub-line {
-      font-size: 1.15rem;
-      font-weight: 500;
-      color: rgba(255,255,255,0.75);
-      letter-spacing: 0.01em;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: rgba(255,255,255,0.92);
+      letter-spacing: 0;
       display: block;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
     .hero-title .amount {
       color: white;
@@ -184,43 +185,42 @@
       letter-spacing: 0;
     }
     .hero-title .amount-sub {
-      font-size: 1.05rem;
-      font-weight: 500;
-      color: rgba(255,255,255,0.65);
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: rgba(255,255,255,0.92);
       display: block;
-      margin-top: 24px;
-      letter-spacing: 0.06em;
+      margin-top: 20px;
+      letter-spacing: 0;
     }
 
     /* ===== 3. Benefits ===== */
     .benefits { background: white; }
 
-    /* Sub-pitch row */
+    /* Sub-pitch row (3 items: 引越し不要 / 申請も簡単 / 追加費用無) */
     .sub-pitch-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      gap: 12px;
       margin-top: 28px;
-      margin-bottom: 36px;
+      margin-bottom: 32px;
     }
     .sub-pitch-item {
-      background: white;
-      border: 1px solid #E2E8F0;
+      background: linear-gradient(135deg, #EEF2FF, #E8F0FE);
+      border: 1px solid var(--light-blue);
       border-radius: 14px;
-      padding: 18px 12px;
+      padding: 18px 14px;
       text-align: center;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
     }
     .sub-pitch-label {
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 5px;
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: var(--dark-blue);
+      margin-bottom: 4px;
     }
     .sub-pitch-desc {
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       color: var(--text-light);
-      line-height: 1.55;
+      line-height: 1.5;
     }
 
     /* Benefit cards (no icon — top accent border instead) */
@@ -505,20 +505,25 @@
       position: relative;
       overflow: hidden;
     }
-    .savings-callout::before { display: none; }
+    .savings-callout::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size: 20px 20px;
+      pointer-events: none;
+    }
     .savings-badge {
       display: inline-block;
-      background: rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.9);
-      font-family: 'IBM Plex Sans', sans-serif;
-      font-weight: 600;
-      font-size: 0.68rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      padding: 5px 16px;
-      border-radius: 100px;
-      margin-bottom: 20px;
-      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.2);
+      color: white;
+      font-weight: 700;
+      font-size: 0.78rem;
+      padding: 4px 16px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      letter-spacing: 0.06em;
+      border: 1px solid rgba(255,255,255,0.3);
       position: relative;
     }
     .savings-row { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; position: relative; }
@@ -715,30 +720,33 @@
       transform: translateY(-3px);
       box-shadow: var(--shadow-md);
     }
-    .testi-card::before { display: none; }
-    .testi-stars {
-      display: flex;
-      gap: 2px;
-      margin-bottom: 14px;
+    .testi-card::before {
+      content: '\201C';
+      position: absolute;
+      top: 12px; left: 18px;
+      font-size: 5rem;
+      line-height: 1;
+      color: var(--light-blue);
+      font-family: Georgia, serif;
+      pointer-events: none;
     }
-    .testi-stars svg { width: 14px; height: 14px; }
-    .testi-quote {
-      font-size: 0.97rem;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.6;
-      margin-bottom: 12px;
-      position: relative;
-    }
-    .testi-body { font-size: 0.82rem; color: var(--text-light); line-height: 1.75; margin-bottom: 16px; }
     .testi-profile {
       font-size: 0.75rem;
       color: var(--text-light);
       font-weight: 600;
-      padding-top: 16px;
-      border-top: 1px solid #F1F5F9;
+      margin-bottom: 12px;
+      position: relative;
+      padding-top: 28px;
+    }
+    .testi-quote {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+      line-height: 1.55;
+      margin-bottom: 10px;
       position: relative;
     }
+    .testi-body { font-size: 0.83rem; color: var(--text-light); line-height: 1.75; }
 
     /* ===== 7. Flow ===== */
     .flow-section { background: white; }
@@ -758,13 +766,11 @@
       background: linear-gradient(to bottom, var(--light-blue), transparent);
     }
     .flow-num {
-      width: 38px; height: 38px;
+      width: 40px; height: 40px;
       border-radius: 50%;
-      background: white;
-      border: 2px solid var(--bright-blue);
-      color: var(--bright-blue);
-      font-family: 'IBM Plex Sans', sans-serif;
-      font-weight: 700; font-size: 0.9rem;
+      background: linear-gradient(135deg, var(--dark-blue), var(--bright-blue));
+      color: white;
+      font-weight: 700; font-size: 1rem;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
@@ -823,12 +829,12 @@
 
     /* ===== 10. Demerits ===== */
     .demerits { background: #F8F9FC; border-top: 1px solid #E8EDF5; }
-    .demerit-card { background: white; border-radius: 18px; padding: 28px; margin-top: 24px; border: 1px solid #E2E8F0; box-shadow: var(--shadow-sm); }
-    .demerit-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid #F1F5F9; }
+    .demerit-card { background: white; border-radius: 18px; padding: 24px; margin-top: 24px; border: 1px solid #E8EDF5; }
+    .demerit-item { display: flex; align-items: flex-start; gap: 12px; padding: 14px 0; border-bottom: 1px solid #F0F4FF; }
     .demerit-item:last-child { border-bottom: none; }
-    .demerit-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gray); margin-top: 8px; flex-shrink: 0; }
-    .demerit-text { font-size: 0.875rem; color: var(--text-light); line-height: 1.75; }
-    .demerit-conclusion { background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 12px; padding: 18px 20px; margin-top: 20px; font-size: 0.92rem; font-weight: 700; color: var(--dark-blue); text-align: center; line-height: 1.6; }
+    .demerit-dot { width: 7px; height: 7px; border-radius: 50%; background: #aaa; margin-top: 7px; flex-shrink: 0; }
+    .demerit-text { font-size: 0.875rem; color: var(--text); line-height: 1.7; }
+    .demerit-conclusion { background: linear-gradient(135deg, #EEF2FF, #E8F0FE); border-radius: 12px; padding: 18px 20px; margin-top: 20px; font-size: 0.92rem; font-weight: 700; color: var(--dark-blue); text-align: center; line-height: 1.55; }
 
     /* ===== 11. Footer ===== */
     .footer {
@@ -1050,40 +1056,19 @@
       <h2 class="section-title">利用者の声</h2>
       <div class="testimonials-grid">
         <div class="testi-card fade-in">
-          <div class="testi-stars">
-            <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          </div>
+          <div class="testi-profile">20代・男性 / 営業職</div>
           <div class="testi-quote">月2万円増えたので、NISAを始めました。</div>
           <div class="testi-body">将来への備えができて、老後の不安がだいぶ薄れました。手取りが増えるだけでこんなに気持ちが楽になるとは思っていなかったです。</div>
-          <div class="testi-profile">20代・男性 / 営業職</div>
         </div>
         <div class="testi-card fade-in delay-1">
-          <div class="testi-stars">
-            <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          </div>
+          <div class="testi-profile">30代・男性 / マーケティング職</div>
           <div class="testi-quote">手続きは申込書を出しただけ。とても簡単でした。</div>
           <div class="testi-body">「どうせ面倒くさいだろう」と思っていましたが、契約書をスマホで撮って送っただけで終わりました。翌月からしれっと手取りが増えていてびっくりしました。</div>
-          <div class="testi-profile">30代・男性 / マーケティング職</div>
         </div>
         <div class="testi-card fade-in delay-2">
-          <div class="testi-stars">
-            <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          </div>
+          <div class="testi-profile">20代・女性 / 事務職</div>
           <div class="testi-quote">やめたくなったら1ヶ月で解約できる。</div>
           <div class="testi-body">「縛られる」イメージがあったけど、1ヶ月前に申し出ればいつでも解約できると聞いて気軽に始めました。</div>
-          <div class="testi-profile">20代・女性 / 事務職</div>
         </div>
       </div>
     </div>
