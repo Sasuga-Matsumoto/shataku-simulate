@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1E3A8A">
   <title>PLEX 福利厚生社宅 | 従業員の方へ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,6 +11,7 @@
   <style>
     /* ===== Variables ===== */
     :root {
+      color-scheme: light;
       --dark-blue: #1E3A8A;
       --bright-blue: #3366FF;
       --accent-blue: #4A86E8;
@@ -34,7 +36,25 @@
       color: var(--text);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
+
+    /* ===== Skip link ===== */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 8px;
+      z-index: 9999;
+      background: var(--dark-blue);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .skip-link:focus { top: 8px; }
 
     /* ===== Scroll fade-in ===== */
     .fade-in {
@@ -46,6 +66,9 @@
     .fade-in.delay-1 { transition-delay: 0.1s; }
     .fade-in.delay-2 { transition-delay: 0.2s; }
     .fade-in.delay-3 { transition-delay: 0.3s; }
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in { opacity: 1; transform: none; transition: none; }
+    }
 
     /* ===== Section common ===== */
     .section { padding: 64px 20px; }
@@ -77,11 +100,13 @@
       line-height: 1.25;
       margin-bottom: 14px;
       letter-spacing: -0.01em;
+      text-wrap: balance;
     }
     .section-desc {
       font-size: 0.9rem;
       color: var(--text-light);
       line-height: 1.8;
+      text-wrap: pretty;
     }
 
     /* ===== 1. Header ===== */
@@ -333,6 +358,7 @@
       color: white;
     }
     .slide-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .slide-btn:focus-visible { outline: 3px solid var(--bright-blue); outline-offset: 2px; }
     .slides-dot-area {
       display: flex;
       align-items: center;
@@ -356,6 +382,7 @@
       border-radius: 4px;
       background: var(--bright-blue);
     }
+    .slide-dot:focus-visible { outline: 3px solid var(--bright-blue); outline-offset: 3px; }
     .slide-hint {
       font-size: 0.72rem;
       color: var(--text-light);
@@ -493,6 +520,7 @@
       box-shadow: 0 6px 20px rgba(51,102,255,0.35);
     }
     .calc-btn:active { opacity: 0.85; transform: translateY(0); }
+    .calc-btn:focus-visible { outline: 3px solid white; outline-offset: 3px; }
 
     /* Results */
     #sim-results { display: none; }
@@ -618,6 +646,9 @@
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-8px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .arrow-icon { animation: none; }
     }
     .chart-center .up-label {
       font-size: 0.8rem;
@@ -821,6 +852,7 @@
       transition: background 0.15s;
     }
     .faq-q:hover { background: rgba(51,102,255,0.03); }
+    .faq-q:focus-visible { outline: 3px solid var(--bright-blue); outline-offset: -3px; }
     .faq-icon { width: 26px; height: 26px; border-radius: 50%; background: #EFF6FF; color: var(--bright-blue); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.9rem; font-weight: 700; transition: background 0.2s, color 0.2s, transform 0.25s; }
     .faq-item.open .faq-icon { background: var(--bright-blue); color: white; transform: rotate(45deg); }
     .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.32s ease; }
@@ -874,12 +906,14 @@
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">コンテンツにスキップ</a>
 
   <!-- 1. Header -->
   <header class="header">
     <div class="header-logo">PLEX <span>福利厚生社宅</span></div>
   </header>
 
+  <main id="main-content">
   <!-- 2. Hero -->
   <section class="hero">
     <div class="hero-glow"></div>
@@ -925,23 +959,23 @@
       <p class="section-desc">スライドを読むだけで制度の概要がわかります。左右にスワイプまたはボタンで切り替えてください。</p>
       <div class="slides-wrapper fade-in">
         <div class="slides-track" id="slides-track">
-          <div class="slide-img-wrap"><img src="slides/slide_01.png" alt="福利厚生社宅制度" loading="eager"><span class="slide-counter">1 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_02.png" alt="制度の対象者" loading="lazy"><span class="slide-counter">2 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_03.png" alt="制度の仕組み" loading="lazy"><span class="slide-counter">3 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_04.png" alt="給料組み換えの仕組み" loading="lazy"><span class="slide-counter">4 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_05.png" alt="手取りアップの例" loading="lazy"><span class="slide-counter">5 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_06.png" alt="経済的メリットの概算例" loading="lazy"><span class="slide-counter">6 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_07.png" alt="減額反映のタイミング" loading="lazy"><span class="slide-counter">7 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_08.png" alt="給与明細のイメージ" loading="lazy"><span class="slide-counter">8 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_09.png" alt="その他メリット" loading="lazy"><span class="slide-counter">9 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_10.png" alt="デメリット" loading="lazy"><span class="slide-counter">10 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_11.png" alt="ご利用方法" loading="lazy"><span class="slide-counter">11 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_12.png" alt="利用開始までの流れ" loading="lazy"><span class="slide-counter">12 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_13.png" alt="Step1 利用申請" loading="lazy"><span class="slide-counter">13 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_14.png" alt="Step2 必要書類の提出" loading="lazy"><span class="slide-counter">14 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_15.png" alt="Step3 条件確認・Step4 契約手続き" loading="lazy"><span class="slide-counter">15 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_16.png" alt="解約の方法" loading="lazy"><span class="slide-counter">16 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_17.png" alt="お問い合わせ" loading="lazy"><span class="slide-counter">17 / 17</span></div>
+          <div class="slide-img-wrap"><img src="slides/slide_01.png" alt="福利厚生社宅制度" loading="eager" fetchpriority="high" width="1920" height="1080"><span class="slide-counter">1 / 17</span></div>
+          <div class="slide-img-wrap"><img src="slides/slide_02.png" alt="制度の対象者" loading="lazy" width="1920" height="1080"><span class="slide-counter">2 / 17</span></div>
+          <div class="slide-img-wrap"><img src="slides/slide_03.png" alt="制度の仕組み" loading="lazy" width="1920" height="1080"><span class="slide-counter">3 / 17</span></div>
+          <div class="slide-img-wrap"><img src="slides/slide_04.png" alt="給料組み換えの仕組み" loading="lazy" width="1920" height="1080"><span class="slide-counter">4 / 17</span></div>
+          <div class="slide-img-wrap"><img src="slides/slide_05.png" alt="手取りアップの例" loading="lazy" width="1920" height="1080"><span class="slide-counter">5 / 17</span></div>
+          <div class="slide-img-wrap"><img src="slides/slide_06.png" alt="経済的メリットの概算例" loading="lazy" width="1920" height="1080"><span class="slide-counter">6 / 17</span></div>
+          <div class="slide-img-wrap"><img src="slides/slide_07.png" alt="減額反映のタイミング" loading="lazy" width="1920" height="1080"><span class="slide-counter">7 / 17</span></div>
+          <div class="slide-img-wrap"><img src="slides/slide_08.png" alt="給与明細のイメージ" loading="lazy" width="1920" height="1080"><span class="slide-counter">8 / 17</span></div>
+          <div class="slide-img-wrap"><img src="slides/slide_09.png" alt="その他メリット" loading="lazy" width="1920" height="1080"><span class="slide-counter">9 / 17</span></div>
+          <div class="slide-img-wrap"><img src="slides/slide_10.png" alt="デメリット" loading="lazy" width="1920" height="1080"><span class="slide-counter">10 / 17</span></div>
+          <div class="slide-img-wrap"><img src="slides/slide_11.png" alt="ご利用方法" loading="lazy" width="1920" height="1080"><span class="slide-counter">11 / 17</span></div>
+          <div class="slide-img-wrap"><img src="slides/slide_12.png" alt="利用開始までの流れ" loading="lazy" width="1920" height="1080"><span class="slide-counter">12 / 17</span></div>
+          <div class="slide-img-wrap"><img src="slides/slide_13.png" alt="Step1 利用申請" loading="lazy" width="1920" height="1080"><span class="slide-counter">13 / 17</span></div>
+          <div class="slide-img-wrap"><img src="slides/slide_14.png" alt="Step2 必要書類の提出" loading="lazy" width="1920" height="1080"><span class="slide-counter">14 / 17</span></div>
+          <div class="slide-img-wrap"><img src="slides/slide_15.png" alt="Step3 条件確認・Step4 契約手続き" loading="lazy" width="1920" height="1080"><span class="slide-counter">15 / 17</span></div>
+          <div class="slide-img-wrap"><img src="slides/slide_16.png" alt="解約の方法" loading="lazy" width="1920" height="1080"><span class="slide-counter">16 / 17</span></div>
+          <div class="slide-img-wrap"><img src="slides/slide_17.png" alt="お問い合わせ" loading="lazy" width="1920" height="1080"><span class="slide-counter">17 / 17</span></div>
         </div>
         <div class="slides-nav">
           <button class="slide-btn" id="slide-prev" aria-label="前のスライド">&#8592;</button>
@@ -975,20 +1009,20 @@
           <div class="input-group">
             <label for="salary">月収（額面の金額）</label>
             <div class="input-with-unit">
-              <input type="number" id="salary" inputmode="numeric" placeholder="300000" step="10000" min="0" value="300000">
+              <input type="number" id="salary" name="salary" autocomplete="off" inputmode="numeric" placeholder="300000" step="10000" min="0" value="300000">
               <span class="input-unit">円</span>
             </div>
           </div>
           <div class="input-group">
             <label for="rent">賃料（共益費・管理費を含む）</label>
             <div class="input-with-unit">
-              <input type="number" id="rent" inputmode="numeric" placeholder="80000" step="1000" min="0" value="80000">
+              <input type="number" id="rent" name="rent" autocomplete="off" inputmode="numeric" placeholder="80000" step="1000" min="0" value="80000">
               <span class="input-unit">円</span>
             </div>
           </div>
           <div class="input-group">
             <label for="prefecture">勤務地の都道府県</label>
-            <select id="prefecture">
+            <select id="prefecture" name="prefecture" autocomplete="off">
               <option value="">選択してください</option>
             </select>
           </div>
@@ -1022,7 +1056,7 @@
             </div>
             <div class="chart-center">
               <div class="arrow-icon">
-                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M14 2L5 13H11V26H17V13H23L14 2Z" fill="#3366FF"/>
                 </svg>
               </div>
@@ -1119,7 +1153,7 @@
       <div class="section-label">福利厚生社宅のしくみ</div>
       <h2 class="section-title">手取りアップの仕組み</h2>
       <div class="mech-card fade-in">
-        <img src="mechanism.png" alt="手取りアップの仕組み" style="width:100%;height:auto;border-radius:8px;display:block;">
+        <img src="mechanism.png" alt="手取りアップの仕組み" width="800" height="450" style="width:100%;height:auto;border-radius:8px;display:block;">
       </div>
     </div>
   </section>
@@ -1181,6 +1215,7 @@
     </div>
   </section>
 
+  </main>
   <!-- 11. Footer -->
   <footer class="footer">
     <div class="footer-logo">PLEX 福利厚生社宅</div>
