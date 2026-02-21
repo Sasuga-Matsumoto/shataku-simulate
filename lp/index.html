@@ -249,19 +249,19 @@
     .hero-sub-pitch {
       display: flex;
       justify-content: center;
-      gap: 12px;
+      align-items: center;
+      gap: 0;
       flex-wrap: wrap;
       margin-top: 24px;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.8);
     }
     .hero-sub-pitch span {
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.25);
-      color: rgba(255,255,255,0.92);
-      padding: 8px 18px;
-      border-radius: 50px;
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.02em;
+      padding: 0 16px;
+      white-space: nowrap;
+    }
+    .hero-sub-pitch span:not(:last-child) {
+      border-right: 1px solid rgba(255,255,255,0.3);
     }
     .hero-sub-pitch strong {
       color: white;
