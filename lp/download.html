@@ -920,6 +920,8 @@
       return valid;
     }
 
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbwZ4_1GJsYGmpCGthsXy3S5EWHLQXZgi9rKQQYefemeu7j-HmhcwSarU0D7WNN5Jb1O/exec';
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
@@ -929,31 +931,22 @@
       submitBtn.disabled = true;
       submitBtn.textContent = '送信中...';
 
-      // Build mailto body
       const data = {
-        '会社名': form.company.value.trim(),
-        '氏名': form.lastName.value.trim() + ' ' + form.firstName.value.trim(),
-        'メールアドレス': form.email.value.trim(),
-        '電話番号': form.phone.value.trim(),
-        '従業員数': form.employees.value || '未選択',
-        '部署名': form.department.value.trim() || '未入力',
-        '役職': form.position.value.trim() || '未入力'
+        company: form.company.value.trim(),
+        lastName: form.lastName.value.trim(),
+        firstName: form.firstName.value.trim(),
+        email: form.email.value.trim(),
+        phone: form.phone.value.trim(),
+        employees: form.employees.value || '',
+        department: form.department.value.trim() || '',
+        position: form.position.value.trim() || ''
       };
 
-      const body = Object.entries(data).map(([k, v]) => k + ': ' + v).join('\n');
-      const subject = '【資料ダウンロード】' + data['会社名'] + ' ' + data['氏名'] + '様';
-      const mailtoUrl = 'mailto:shataku@plex.co.jp?subject=' +
-        encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-
-      // Open mailto (silent send)
-      const mailFrame = document.createElement('iframe');
-      mailFrame.style.display = 'none';
-      mailFrame.src = mailtoUrl;
-      document.body.appendChild(mailFrame);
-      setTimeout(() => document.body.removeChild(mailFrame), 2000);
-
-      // Show success
-      setTimeout(() => {
+      fetch(GAS_URL, {
+        method: 'POST',
+        body: JSON.stringify(data)
+      })
+      .then(() => {
         document.getElementById('formArea').style.display = 'none';
         const success = document.getElementById('successMessage');
         success.style.display = 'block';
@@ -964,7 +957,12 @@
           success.style.opacity = '1';
           success.style.transform = 'translateY(0)';
         });
-      }, 800);
+      })
+      .catch(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '資料をダウンロード';
+        alert('送信に失敗しました。時間をおいて再度お試しください。');
+      });
     });
   </script>
 </body>
