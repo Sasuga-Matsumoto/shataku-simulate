@@ -204,89 +204,6 @@
     }
     .mobile-menu a:hover { color: var(--bright-blue); }
 
-    /* Header dropdown menu */
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .header-dropdown {
-      position: relative;
-    }
-    .header-dropdown-btn {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      background: none;
-      border: 1.5px solid var(--light-blue);
-      border-radius: 8px;
-      padding: 6px 12px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--dark-blue);
-      cursor: pointer;
-      transition: background 0.2s, border-color 0.2s;
-      white-space: nowrap;
-    }
-    .header-dropdown-btn:hover {
-      background: #EFF6FF;
-      border-color: var(--bright-blue);
-    }
-    .header-dropdown-btn svg {
-      width: 16px;
-      height: 16px;
-      transition: transform 0.25s;
-    }
-    .header-dropdown.open .header-dropdown-btn svg {
-      transform: rotate(180deg);
-    }
-    .header-dropdown-panel {
-      display: none;
-      position: absolute;
-      top: calc(100% + 8px);
-      right: 0;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 8px 32px rgba(30,58,138,0.15), 0 2px 8px rgba(0,0,0,0.06);
-      min-width: 220px;
-      padding: 8px 0;
-      z-index: 300;
-      animation: dropdownFadeIn 0.2s ease;
-    }
-    @keyframes dropdownFadeIn {
-      from { opacity: 0; transform: translateY(-6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .header-dropdown.open .header-dropdown-panel {
-      display: block;
-    }
-    .header-dropdown-panel a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 18px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text);
-      text-decoration: none;
-      transition: background 0.15s;
-    }
-    .header-dropdown-panel a:hover {
-      background: #F1F5F9;
-    }
-    .header-dropdown-panel a svg {
-      width: 18px;
-      height: 18px;
-      color: var(--bright-blue);
-      flex-shrink: 0;
-    }
-    .header-dropdown-panel .dropdown-desc {
-      font-size: 0.72rem;
-      font-weight: 400;
-      color: var(--text-light);
-      margin-top: 2px;
-    }
-
     @media (min-width: 768px) {
       .header-nav { display: flex; }
       .hamburger { display: none; }
@@ -1030,26 +947,9 @@
         <li><a href="#faq">よくある質問</a></li>
       </ul>
     </nav>
-    <div class="header-right">
-      <div class="header-dropdown" id="headerDropdown">
-        <button class="header-dropdown-btn" aria-expanded="false" aria-haspopup="true">
-          その他
-          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
-        </button>
-        <div class="header-dropdown-panel">
-          <a href="https://shataku-lp.vercel.app/" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            <div>
-              <div>サービス説明ページ</div>
-              <div class="dropdown-desc">企業担当者向けの詳細情報</div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <button class="hamburger" aria-label="メニュー" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+    <button class="hamburger" aria-label="メニュー" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
   <!-- Mobile menu -->
@@ -1059,8 +959,6 @@
     <a href="#flow">利用方法</a>
     <a href="#mechanism">仕組み</a>
     <a href="#faq">よくある質問</a>
-    <hr style="width:60%; border:none; border-top:1px solid #E2E8F0; margin:8px 0;">
-    <a href="https://shataku-lp.vercel.app/" target="_blank" rel="noopener" style="font-size:0.95rem; color:var(--bright-blue);">サービス説明ページ &rarr;</a>
   </div>
 
   <main id="main-content">
@@ -1352,21 +1250,6 @@
   </footer>
 
 <script>
-// ===== Header dropdown =====
-var dropdown = document.getElementById('headerDropdown');
-var dropdownBtn = dropdown.querySelector('.header-dropdown-btn');
-dropdownBtn.addEventListener('click', function(e) {
-  e.stopPropagation();
-  var isOpen = dropdown.classList.toggle('open');
-  dropdownBtn.setAttribute('aria-expanded', isOpen);
-});
-document.addEventListener('click', function(e) {
-  if (!dropdown.contains(e.target)) {
-    dropdown.classList.remove('open');
-    dropdownBtn.setAttribute('aria-expanded', 'false');
-  }
-});
-
 // ===== Hamburger menu =====
 var hamburger = document.querySelector('.hamburger');
 var mobileMenu = document.getElementById('mobileMenu');
