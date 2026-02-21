@@ -8,7 +8,8 @@
   <meta name="description" content="PLEX福利厚生社宅は、社宅の仕組みを活用して従業員の手取りアップと企業の社会保険料削減を同時に実現するサービスです。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet"></noscript>
   <style>
     /* ===== Variables ===== */
     :root {
@@ -319,13 +320,13 @@
       .btn::after { display: none; }
     }
     .btn-primary {
-      background: linear-gradient(135deg, var(--bright-blue) 0%, var(--accent-blue) 100%);
+      background: linear-gradient(135deg, #F97316 0%, #FB923C 100%);
       color: white;
-      box-shadow: 0 2px 8px rgba(51,102,255,0.25), 0 1px 2px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 8px rgba(249,115,22,0.3), 0 1px 2px rgba(0,0,0,0.08);
     }
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(51,102,255,0.38), 0 2px 4px rgba(0,0,0,0.08);
+      box-shadow: 0 8px 24px rgba(249,115,22,0.4), 0 2px 4px rgba(0,0,0,0.08);
     }
     .btn-outline {
       background: transparent;
@@ -517,6 +518,12 @@
       box-shadow: 0 8px 24px rgba(51,102,255,0.38), 0 2px 4px rgba(0,0,0,0.08);
     }
     .calc-btn:active { opacity: 0.88; transform: translateY(0); }
+    .inline-error {
+      color: #DC2626;
+      font-size: 0.8rem;
+      min-height: 1.2em;
+      margin-top: 4px;
+    }
     .sim-notes {
       font-size: 0.72rem;
       color: #999;
@@ -775,10 +782,7 @@
     .faq-answer {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.35s ease, padding 0.35s ease;
-    }
-    .faq-item.active .faq-answer {
-      max-height: 300px;
+      transition: max-height 0.35s ease;
     }
     .faq-answer-inner {
       padding: 0 0 20px;
@@ -825,10 +829,10 @@
       line-height: 1.8;
       max-width: 780px;
       margin: 0 auto;
-      white-space: nowrap;
     }
     @media (min-width: 768px) {
       .final-cta h2 { font-size: 2rem; }
+      .final-cta p { white-space: nowrap; }
     }
 
     /* ===== 9. Footer ===== */
@@ -1020,6 +1024,7 @@
             <input type="text" id="sim-count" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="例: 50" value="10">
             <span class="input-unit">人</span>
           </div>
+          <div class="inline-error" id="sim-error"></div>
         </div>
         <button class="calc-btn" id="sim-calc">計算する</button>
         <div class="sim-notes">
@@ -1041,7 +1046,7 @@
             </div>
             <div class="result-divider"></div>
             <div class="result-item">
-              <div class="r-label">会社負担 社会保険料変動額</div>
+              <div class="r-label">会社負担 社会保険料 年間削減額</div>
               <div class="r-value"><span id="res-shaho">0</span><span class="r-unit">円/年</span></div>
               <div class="r-sub">1人あたり約15,000円 × <span id="res-count2">0</span>人</div>
             </div>
@@ -1070,15 +1075,15 @@
       <div class="pain-cards fade-in">
         <div class="pain-card">
           <div class="pain-icon">!</div>
-          <p>社員の給料を上げたいけど<br>コスト増は困る</p>
+          <p>賃上げ圧力が高まっているが<br>原資が限られている</p>
         </div>
         <div class="pain-card">
           <div class="pain-icon">!</div>
-          <p>福利厚生を充実させたいが<br>手間がかかりそう</p>
+          <p>せっかく採用した人材が<br>好待遇の企業に転職してしまう</p>
         </div>
         <div class="pain-card">
           <div class="pain-icon">!</div>
-          <p>制度の法的根拠や<br>手続きに不安がある</p>
+          <p>福利厚生を強化したいが<br>何から始めればいいか分からない</p>
         </div>
       </div>
 
@@ -1172,32 +1177,32 @@
 
       <div class="faq-list fade-in">
         <div class="faq-item">
-          <button class="faq-question">Q. 社宅導入時に社会保険料はどれぐらい削減できますか？</button>
-          <div class="faq-answer">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a1">Q. 社宅導入時に社会保険料はどれぐらい削減できますか？</button>
+          <div class="faq-answer" id="faq-a1" role="region">
             <div class="faq-answer-inner">条件によりますが、月給30万円・家賃8万円の場合、1人あたり年間約1〜2万円の企業側社会保険料の削減が見込めます。</div>
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-question">Q. 従業員の手取りはどれぐらい増えますか？</button>
-          <div class="faq-answer">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a2">Q. 従業員の手取りはどれぐらい増えますか？</button>
+          <div class="faq-answer" id="faq-a2" role="region">
             <div class="faq-answer-inner">月給30万円の場合、年間約17〜18万円程度の手取り向上が見込めます。給与額や家賃によって変動します。</div>
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-question">Q. 今住んでいる家を社宅にできますか？</button>
-          <div class="faq-answer">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a3">Q. 今住んでいる家を社宅にできますか？</button>
+          <div class="faq-answer" id="faq-a3" role="region">
             <div class="faq-answer-inner">はい、現在お住まいの賃貸物件を個人名義から法人名義に変更して借上社宅とすることが可能です。引越しは不要です。</div>
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-question">Q. 会社が家賃を負担する必要がありますか？</button>
-          <div class="faq-answer">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a4">Q. 会社が家賃を負担する必要がありますか？</button>
+          <div class="faq-answer" id="faq-a4" role="region">
             <div class="faq-answer-inner">会社が追加で家賃を支払う必要はありません。従業員の給与の一部を現物支給（社宅提供）に切り替える仕組みのため、会社の実質的な追加コストはゼロです。</div>
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-question">Q. 導入にどれくらい時間がかかりますか？</button>
-          <div class="faq-answer">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a5">Q. 導入にどれくらい時間がかかりますか？</button>
+          <div class="faq-answer" id="faq-a5" role="region">
             <div class="faq-answer-inner">最短1週間で導入可能です。規定の作成から名義変更手続きまで、PLEXがすべてサポートいたします。</div>
           </div>
         </div>
@@ -1281,11 +1286,20 @@
     document.querySelectorAll('.faq-question').forEach(btn => {
       btn.addEventListener('click', () => {
         const item = btn.parentElement;
+        const answer = item.querySelector('.faq-answer');
         const wasActive = item.classList.contains('active');
         // Close all
-        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('active');
+          i.querySelector('.faq-answer').style.maxHeight = '0';
+          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
         // Toggle clicked
-        if (!wasActive) item.classList.add('active');
+        if (!wasActive) {
+          item.classList.add('active');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+          btn.setAttribute('aria-expanded', 'true');
+        }
       });
     });
 
@@ -1311,11 +1325,17 @@
       const salary = parseInt(document.getElementById('sim-salary').value, 10);
       const countRaw = document.getElementById('sim-count').value.replace(/[^0-9]/g, '');
       const count = parseInt(countRaw, 10);
+      const errEl = document.getElementById('sim-error');
 
       if (!count || count < 1) {
-        alert('利用人数を入力してください。');
+        errEl.textContent = '利用人数を1以上の半角数字で入力してください。';
         return;
       }
+      if (count > 10000) {
+        errEl.textContent = '利用人数は10,000人以下で入力してください。';
+        return;
+      }
+      errEl.textContent = '';
 
       const tedori = SIM_DATA[salary] || 0;
       const shahoTotal = SHAHO_PER_PERSON * count;
@@ -1327,10 +1347,17 @@
       document.getElementById('res-shaho').textContent = '-' + formatNum(shahoTotal);
       document.getElementById('res-count2').textContent = formatNum(count);
 
-      document.getElementById('sim-results').style.display = 'block';
+      const resultsEl = document.getElementById('sim-results');
+      resultsEl.style.display = 'block';
+      resultsEl.style.opacity = '0';
+      resultsEl.style.transform = 'translateY(16px)';
+      requestAnimationFrame(() => {
+        resultsEl.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        resultsEl.style.opacity = '1';
+        resultsEl.style.transform = 'translateY(0)';
+      });
 
-      // Scroll to results
-      document.getElementById('sim-results').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      resultsEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
   </script>
 </body>
