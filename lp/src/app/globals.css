@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dark-blue: #23418C;
+  --color-bright-blue: #3366FF;
+  --color-accent-blue: #4A86E8;
+  --color-medium-blue: #6D9EEB;
+  --color-light-blue: #A4C2F4;
+  --color-bg: #F5F7FB;
+  --color-card-bg: #FFFFFF;
+  --color-text: #333333;
+  --color-text-light: #666666;
+  --color-off-white: #F8F5F5;
+}
+
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
