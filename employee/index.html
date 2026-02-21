@@ -988,7 +988,7 @@
     </div>
   </section>
 
-  <!-- 4. Slides (image carousel: 17 slides from PPTX) -->
+  <!-- 4. Slides (image carousel: 4 slides from PPTX) -->
   <section class="section slides-section section-offscreen">
     <div class="inner">
       <div class="section-label">しくみをざっくり理解</div>
@@ -996,23 +996,10 @@
       <p class="section-desc">スライドを読むだけで制度の概要がわかります。左右にスワイプまたはボタンで切り替えてください。</p>
       <div class="slides-wrapper fade-in">
         <div class="slides-track" id="slides-track">
-          <div class="slide-img-wrap"><img src="slides/slide_01.png" alt="福利厚生社宅制度" loading="eager" fetchpriority="high" width="1920" height="1080"><span class="slide-counter">1 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_02.png" alt="制度の対象者" loading="lazy" width="1920" height="1080"><span class="slide-counter">2 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_03.png" alt="制度の仕組み" loading="lazy" width="1920" height="1080"><span class="slide-counter">3 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_04.png" alt="給料組み換えの仕組み" loading="lazy" width="1920" height="1080"><span class="slide-counter">4 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_05.png" alt="手取りアップの例" loading="lazy" width="1920" height="1080"><span class="slide-counter">5 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_06.png" alt="経済的メリットの概算例" loading="lazy" width="1920" height="1080"><span class="slide-counter">6 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_07.png" alt="減額反映のタイミング" loading="lazy" width="1920" height="1080"><span class="slide-counter">7 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_08.png" alt="給与明細のイメージ" loading="lazy" width="1920" height="1080"><span class="slide-counter">8 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_09.png" alt="その他メリット" loading="lazy" width="1920" height="1080"><span class="slide-counter">9 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_10.png" alt="デメリット" loading="lazy" width="1920" height="1080"><span class="slide-counter">10 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_11.png" alt="ご利用方法" loading="lazy" width="1920" height="1080"><span class="slide-counter">11 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_12.png" alt="利用開始までの流れ" loading="lazy" width="1920" height="1080"><span class="slide-counter">12 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_13.png" alt="Step1 利用申請" loading="lazy" width="1920" height="1080"><span class="slide-counter">13 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_14.png" alt="Step2 必要書類の提出" loading="lazy" width="1920" height="1080"><span class="slide-counter">14 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_15.png" alt="Step3 条件確認・Step4 契約手続き" loading="lazy" width="1920" height="1080"><span class="slide-counter">15 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_16.png" alt="解約の方法" loading="lazy" width="1920" height="1080"><span class="slide-counter">16 / 17</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_17.png" alt="お問い合わせ" loading="lazy" width="1920" height="1080"><span class="slide-counter">17 / 17</span></div>
+          <div class="slide-img-wrap"><img src="slides/slide_01.png" alt="福利厚生社宅の紹介" loading="eager" fetchpriority="high" width="1920" height="1080"><span class="slide-counter">1 / 4</span></div>
+          <div class="slide-img-wrap"><img src="slides/slide_02.png" alt="年間15〜50万円の手取りアップ" loading="lazy" width="1920" height="1080"><span class="slide-counter">2 / 4</span></div>
+          <div class="slide-img-wrap"><img src="slides/slide_03.png" alt="名義変更で社会保険料・税金が低下する仕組み" loading="lazy" width="1920" height="1080"><span class="slide-counter">3 / 4</span></div>
+          <div class="slide-img-wrap"><img src="slides/slide_04.png" alt="利用申請の3ステップ" loading="lazy" width="1920" height="1080"><span class="slide-counter">4 / 4</span></div>
         </div>
         <div class="slides-nav">
           <button class="slide-btn" id="slide-prev" aria-label="前のスライド">&#8592;</button>
@@ -1492,8 +1479,8 @@ function runCalculation() {
   document.getElementById('sim-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// ===== Slide carousel (17 images) =====
-var TOTAL_SLIDES = 17;
+// ===== Slide carousel (4 images) =====
+var TOTAL_SLIDES = 4;
 var currentSlide = 0;
 var track = document.getElementById('slides-track');
 var dotsArea = document.getElementById('slide-dots');
