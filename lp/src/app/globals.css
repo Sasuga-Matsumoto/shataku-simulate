@@ -1,20 +1,29 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme {
-  --color-dark-blue: #23418C;
-  --color-bright-blue: #3366FF;
-  --color-accent-blue: #4A86E8;
-  --color-medium-blue: #6D9EEB;
-  --color-light-blue: #A4C2F4;
-  --color-bg: #F5F7FB;
-  --color-card-bg: #FFFFFF;
-  --color-text: #333333;
-  --color-text-light: #666666;
-  --color-off-white: #F8F5F5;
+:root {
+  --color-navy: #1E3A8A;
+  --color-blue: #3366FF;
+  --color-orange: #F97316;
+  --color-green: #22B860;
+  --color-bg: #F8FAFC;
+  --color-text: #0F172A;
+  --color-muted: #64748B;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: "Noto Sans JP", sans-serif;
-  background: var(--color-bg);
+  background-color: var(--color-bg);
   color: var(--color-text);
+}
+
+@layer utilities {
+  .dot-grid {
+    background-image: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
 }
