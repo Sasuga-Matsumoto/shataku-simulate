@@ -742,8 +742,8 @@
 
             <!-- 従業員数 -->
             <div class="input-group">
-              <label for="employees">従業員数</label>
-              <select id="employees" name="employees">
+              <label for="employees">従業員数<span class="required">必須</span></label>
+              <select id="employees" name="employees" required>
                 <option value="">選択してください</option>
                 <option value="1-10">1〜10名</option>
                 <option value="11-50">11〜50名</option>
@@ -752,12 +752,14 @@
                 <option value="301-1000">301〜1,000名</option>
                 <option value="1001+">1,001名以上</option>
               </select>
+              <div class="inline-error" id="error-employees"></div>
             </div>
 
             <!-- 部署名 -->
             <div class="input-group">
-              <label for="department">部署名</label>
-              <input type="text" id="department" name="department" placeholder="例: 人事部">
+              <label for="department">部署名<span class="required">必須</span></label>
+              <input type="text" id="department" name="department" placeholder="例: 人事部" required>
+              <div class="inline-error" id="error-department"></div>
             </div>
 
             <!-- 役職 -->
@@ -908,6 +910,18 @@
         valid = false;
       } else if (!/^[\d\-+() ]{8,}$/.test(phone)) {
         showError('phone', '正しい電話番号を入力してください');
+        valid = false;
+      }
+
+      // 従業員数
+      if (!form.employees.value) {
+        showError('employees', '従業員数を選択してください');
+        valid = false;
+      }
+
+      // 部署名
+      if (!form.department.value.trim()) {
+        showError('department', '部署名を入力してください');
         valid = false;
       }
 
