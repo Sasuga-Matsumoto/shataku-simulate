@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#1E3A8A">
   <title>PLEX 福利厚生社宅 | 従業員の方へ</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="180x180" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -291,106 +294,21 @@
     .slides-section {
       background: linear-gradient(180deg, var(--bg) 0%, #edf0fb 100%);
     }
-    .slides-wrapper {
+    .video-wrapper {
       position: relative;
       margin-top: 28px;
       border-radius: 16px;
       box-shadow: 0 4px 28px rgba(35,65,140,0.13);
       overflow: hidden;
       background: white;
-      touch-action: pan-y;
-      user-select: none;
-      cursor: grab;
     }
-    .slides-wrapper.dragging { cursor: grabbing; }
-    .slide-img-wrap img { pointer-events: none; -webkit-user-drag: none; }
-    .slides-track {
-      display: flex;
-      transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
-      will-change: transform;
-    }
-    .slide-img-wrap {
-      min-width: 100%;
-      position: relative;
-    }
-    .slide-img-wrap img {
+    .video-wrapper video {
       width: 100%;
       height: auto;
       display: block;
       aspect-ratio: 16/9;
       object-fit: contain;
       background: white;
-    }
-    .slide-counter {
-      position: absolute;
-      top: 10px;
-      right: 12px;
-      background: rgba(0,0,0,0.45);
-      color: white;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 10px;
-      backdrop-filter: blur(4px);
-    }
-    /* Slide navigation */
-    .slides-nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 16px;
-      background: var(--bg);
-      border-top: 1px solid #E8EDF5;
-    }
-    .slide-btn {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      border: 2px solid var(--light-blue);
-      background: white;
-      color: var(--dark-blue);
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.18s, border-color 0.18s, color 0.18s;
-      flex-shrink: 0;
-    }
-    .slide-btn:hover:not(:disabled) {
-      background: var(--bright-blue);
-      border-color: var(--bright-blue);
-      color: white;
-    }
-    .slide-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-    .slide-btn:focus-visible { outline: 3px solid var(--bright-blue); outline-offset: 2px; }
-    .slides-dot-area {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      flex-wrap: wrap;
-      justify-content: center;
-      flex: 1;
-      padding: 0 10px;
-    }
-    .slide-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--light-blue);
-      cursor: pointer;
-      border: none; padding: 0;
-      transition: width 0.2s, border-radius 0.2s, background 0.2s;
-      flex-shrink: 0;
-    }
-    .slide-dot.active {
-      width: 20px;
-      border-radius: 4px;
-      background: var(--bright-blue);
-    }
-    .slide-dot:focus-visible { outline: 3px solid var(--bright-blue); outline-offset: 3px; }
-    .slide-hint {
-      font-size: 0.72rem;
-      color: var(--text-light);
-      text-align: center;
-      margin-top: 10px;
     }
 
     /* ===== 5. Simulator (GAS-equivalent) ===== */
@@ -993,21 +911,13 @@
     <div class="inner">
       <div class="section-label">しくみをざっくり理解</div>
       <h2 class="section-title">1分でわかる<br>福利厚生社宅</h2>
-      <p class="section-desc">スライドを読むだけで制度の概要がわかります。左右にスワイプまたはボタンで切り替えてください。</p>
-      <div class="slides-wrapper fade-in">
-        <div class="slides-track" id="slides-track">
-          <div class="slide-img-wrap"><img src="slides/slide_01.png" alt="福利厚生社宅の紹介" loading="eager" fetchpriority="high" width="1920" height="1080"><span class="slide-counter">1 / 4</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_02.png" alt="年間15〜50万円の手取りアップ" loading="lazy" width="1920" height="1080"><span class="slide-counter">2 / 4</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_03.png" alt="名義変更で社会保険料・税金が低下する仕組み" loading="lazy" width="1920" height="1080"><span class="slide-counter">3 / 4</span></div>
-          <div class="slide-img-wrap"><img src="slides/slide_04.png" alt="利用申請の3ステップ" loading="lazy" width="1920" height="1080"><span class="slide-counter">4 / 4</span></div>
-        </div>
-        <div class="slides-nav">
-          <button class="slide-btn" id="slide-prev" aria-label="前のスライド">&#8592;</button>
-          <div class="slides-dot-area" id="slide-dots"></div>
-          <button class="slide-btn" id="slide-next" aria-label="次のスライド">&#8594;</button>
-        </div>
+      <p class="section-desc">動画で制度の概要がわかります。再生ボタンを押してご覧ください。</p>
+      <div class="video-wrapper fade-in">
+        <video id="slides-video" width="1920" height="1080" controls playsinline preload="metadata" poster="slides/slide_01.png">
+          <source src="slides/slide_01_motion.mp4" type="video/mp4">
+          お使いのブラウザは動画再生に対応していません。
+        </video>
       </div>
-      <p class="slide-hint">← スワイプまたはボタンで切り替え →</p>
     </div>
   </section>
 
@@ -1478,75 +1388,6 @@ function runCalculation() {
   document.getElementById('sim-results').style.display = 'block';
   document.getElementById('sim-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-
-// ===== Slide carousel (4 images) =====
-var TOTAL_SLIDES = 4;
-var currentSlide = 0;
-var track = document.getElementById('slides-track');
-var dotsArea = document.getElementById('slide-dots');
-var prevBtn = document.getElementById('slide-prev');
-var nextBtn = document.getElementById('slide-next');
-
-// Build dots dynamically
-(function() {
-  for (var i = 0; i < TOTAL_SLIDES; i++) {
-    var d = document.createElement('button');
-    d.className = 'slide-dot' + (i === 0 ? ' active' : '');
-    d.setAttribute('aria-label', 'スライド' + (i + 1));
-    d.setAttribute('data-idx', i);
-    dotsArea.appendChild(d);
-  }
-})();
-
-function goTo(n) {
-  currentSlide = Math.max(0, Math.min(n, TOTAL_SLIDES - 1));
-  track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
-  dotsArea.querySelectorAll('.slide-dot').forEach(function(d, i) {
-    d.classList.toggle('active', i === currentSlide);
-  });
-  prevBtn.disabled = (currentSlide === 0);
-  nextBtn.disabled = (currentSlide === TOTAL_SLIDES - 1);
-}
-
-prevBtn.addEventListener('click', function() { goTo(currentSlide - 1); });
-nextBtn.addEventListener('click', function() { goTo(currentSlide + 1); });
-dotsArea.addEventListener('click', function(e) {
-  var idx = e.target.getAttribute('data-idx');
-  if (idx !== null) goTo(parseInt(idx));
-});
-goTo(0);
-
-// Pointer-based swipe/drag (mouse + touch unified)
-var pointerStartX = 0, pointerStartY = 0, isDragging = false;
-var slidesWrapper = document.querySelector('.slides-wrapper');
-
-slidesWrapper.addEventListener('pointerdown', function(e) {
-  if (e.target.closest('.slide-btn, .slide-dot')) return;
-  pointerStartX = e.clientX;
-  pointerStartY = e.clientY;
-  isDragging = true;
-  slidesWrapper.setPointerCapture(e.pointerId);
-  slidesWrapper.classList.add('dragging');
-});
-slidesWrapper.addEventListener('pointermove', function(e) {
-  if (!isDragging) return;
-  // Suppress click-like movement noise
-});
-slidesWrapper.addEventListener('pointerup', function(e) {
-  if (!isDragging) return;
-  isDragging = false;
-  slidesWrapper.classList.remove('dragging');
-  var dx = pointerStartX - e.clientX;
-  var dy = Math.abs(pointerStartY - e.clientY);
-  if (Math.abs(dx) > 40 && Math.abs(dx) > dy) {
-    if (dx > 0) goTo(currentSlide + 1);
-    else         goTo(currentSlide - 1);
-  }
-});
-slidesWrapper.addEventListener('pointercancel', function() {
-  isDragging = false;
-  slidesWrapper.classList.remove('dragging');
-});
 
 // ===== FAQ accordion =====
 document.querySelectorAll('.faq-q').forEach(function(btn) {
