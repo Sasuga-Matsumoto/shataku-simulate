@@ -117,10 +117,6 @@
       gap: 10px;
       text-decoration: none;
     }
-    .header-logo-img {
-      height: 28px;
-      width: auto;
-    }
     .header-logo {
       font-family: 'IBM Plex Sans', sans-serif;
       font-size: 0.95rem;
@@ -810,8 +806,9 @@
       font-size: 0.9rem;
       opacity: 0.85;
       line-height: 1.8;
-      max-width: 560px;
+      max-width: 780px;
       margin: 0 auto;
+      white-space: nowrap;
     }
     @media (min-width: 768px) {
       .final-cta h2 { font-size: 2rem; }
@@ -837,10 +834,6 @@
       display: flex;
       align-items: center;
       gap: 10px;
-    }
-    .footer-logo img {
-      height: 24px;
-      filter: brightness(0) invert(1);
     }
     .footer-logo-text {
       font-family: 'IBM Plex Sans', sans-serif;
@@ -899,7 +892,6 @@
   <!-- ===== Header ===== -->
   <header class="header">
     <a href="#" class="header-left">
-      <img src="../サービス理解/ロゴ.png" alt="PLEX" class="header-logo-img">
       <div class="header-logo">PLEX <span>福利厚生社宅</span></div>
     </a>
     <nav>
@@ -908,7 +900,7 @@
         <li><a href="#simulator">シミュレーション</a></li>
         <li><a href="#service">サービス詳細</a></li>
         <li><a href="#faq">よくある質問</a></li>
-        <li><a href="#contact" class="btn btn-primary" style="padding: 10px 22px; font-size: 0.82rem;">お問い合わせ</a></li>
+        <li><a href="#contact" class="btn btn-primary" style="padding: 10px 22px; font-size: 0.82rem; color: white;">資料ダウンロード</a></li>
       </ul>
     </nav>
     <button class="hamburger" aria-label="メニュー" aria-expanded="false">
@@ -1209,7 +1201,6 @@
       <div class="footer-top">
         <div>
           <div class="footer-logo">
-            <img src="../サービス理解/ロゴ.png" alt="PLEX">
             <span class="footer-logo-text">PLEX 福利厚生社宅</span>
           </div>
           <div class="footer-company">株式会社プレックス</div>
