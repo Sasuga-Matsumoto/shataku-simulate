@@ -33,6 +33,7 @@
 
     /* ===== Reset & Base ===== */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    [id] { scroll-margin-top: 60px; }
     body {
       font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif;
       background: var(--bg);
@@ -136,6 +137,77 @@
       letter-spacing: 0.01em;
     }
     .header-logo span { color: var(--bright-blue); }
+    .header-logo { white-space: nowrap; }
+
+    /* Desktop nav */
+    .header-nav {
+      display: none;
+      list-style: none;
+      gap: 24px;
+      align-items: center;
+    }
+    .header-nav a {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .header-nav a:hover { color: var(--bright-blue); }
+
+    /* Hamburger */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      z-index: 200;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--dark-blue);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(16px);
+      z-index: 150;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+    }
+    .mobile-menu.active { display: flex; }
+    .mobile-menu a {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+      text-decoration: none;
+    }
+    .mobile-menu a:hover { color: var(--bright-blue); }
+
+    @media (min-width: 768px) {
+      .header-nav { display: flex; }
+      .hamburger { display: none; }
+    }
     .badge-employee {
       display: inline-block;
       background: linear-gradient(135deg, var(--dark-blue), var(--bright-blue));
@@ -866,7 +938,28 @@
   <!-- 1. Header -->
   <header class="header">
     <div class="header-logo">PLEX <span>福利厚生社宅</span></div>
+    <nav>
+      <ul class="header-nav">
+        <li><a href="#benefits">メリット</a></li>
+        <li><a href="#video">動画で解説</a></li>
+        <li><a href="#simulator">シミュレーション</a></li>
+        <li><a href="#flow">利用の流れ</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+    <button class="hamburger" aria-label="メニュー" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#benefits">メリット</a>
+    <a href="#video">動画で解説</a>
+    <a href="#simulator">シミュレーション</a>
+    <a href="#flow">利用の流れ</a>
+    <a href="#faq">FAQ</a>
+  </div>
 
   <main id="main-content">
   <!-- 2. Hero -->
@@ -880,7 +973,7 @@
   </section>
 
   <!-- 3. Benefits -->
-  <section class="section benefits section-offscreen">
+  <section id="benefits" class="section benefits section-offscreen">
     <div class="inner">
       <div class="section-label">メリット</div>
       <h2 class="section-title">3つのメリット</h2>
@@ -907,7 +1000,7 @@
   </section>
 
   <!-- 4. Slides (image carousel: 4 slides from PPTX) -->
-  <section class="section slides-section section-offscreen">
+  <section id="video" class="section slides-section section-offscreen">
     <div class="inner">
       <div class="section-label">しくみをざっくり理解</div>
       <h2 class="section-title">1分でわかる<br>福利厚生社宅</h2>
@@ -922,7 +1015,7 @@
   </section>
 
   <!-- 5. Simulator (GAS-equivalent: salary + rent + prefecture → bar chart + table) -->
-  <section class="section simulator section-offscreen">
+  <section id="simulator" class="section simulator section-offscreen">
     <div class="inner">
       <div class="section-label">手取りシミュレーター</div>
       <h2 class="section-title">あなたの手取り増加を<br>計算してみよう</h2>
@@ -1043,7 +1136,7 @@
   </section>
 
   <!-- 7. Flow -->
-  <section class="section flow-section section-offscreen">
+  <section id="flow" class="section flow-section section-offscreen">
     <div class="inner">
       <div class="section-label">申込みの流れ</div>
       <h2 class="section-title">4ステップで完了</h2>
@@ -1093,7 +1186,7 @@
   </section>
 
   <!-- 9. FAQ -->
-  <section class="section faq-section section-offscreen">
+  <section id="faq" class="section faq-section section-offscreen">
     <div class="inner">
       <div class="section-label">よくある質問</div>
       <h2 class="section-title">FAQ</h2>
@@ -1157,6 +1250,22 @@
   </footer>
 
 <script>
+// ===== Hamburger menu =====
+var hamburger = document.querySelector('.hamburger');
+var mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', function() {
+  hamburger.classList.toggle('active');
+  mobileMenu.classList.toggle('active');
+  hamburger.setAttribute('aria-expanded', mobileMenu.classList.contains('active'));
+});
+mobileMenu.querySelectorAll('a').forEach(function(link) {
+  link.addEventListener('click', function() {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+  });
+});
+
 // ===== 都道府県別健康保険料率（令和7年度 協会けんぽ） =====
 var PREFECTURE_RATES = {
   '北海道': 0.1031, '青森県': 0.0985, '岩手県': 0.0962,
