@@ -436,7 +436,8 @@
       gap: 10px;
     }
     .input-group input,
-    .input-group select {
+    .input-group select,
+    .input-group textarea {
       width: 100%;
       padding: 12px 14px;
       font-size: 16px;
@@ -448,7 +449,12 @@
       transition: border-color 0.2s, box-shadow 0.2s;
     }
     .input-group input:hover,
-    .input-group select:hover { border-color: #94A3B8; }
+    .input-group select:hover,
+    .input-group textarea:hover { border-color: #94A3B8; }
+    .input-group textarea {
+      resize: vertical;
+      font-family: inherit;
+    }
     .input-group select {
       -webkit-appearance: none;
       appearance: none;
@@ -458,7 +464,8 @@
       padding-right: 38px;
     }
     .input-group input:focus,
-    .input-group select:focus {
+    .input-group select:focus,
+    .input-group textarea:focus {
       outline: none;
       border-color: var(--bright-blue);
       box-shadow: 0 0 0 3px rgba(51,102,255,0.12), 0 1px 4px rgba(51,102,255,0.12);
@@ -478,28 +485,15 @@
       margin-top: 4px;
     }
 
-    /* Checkbox */
-    .checkbox-group {
+    /* Privacy consent */
+    .privacy-consent {
       margin-bottom: 20px;
-    }
-    .checkbox-group label {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
       font-size: 0.82rem;
       color: var(--text-light);
       line-height: 1.6;
-      cursor: pointer;
+      text-align: center;
     }
-    .checkbox-group input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      margin-top: 2px;
-      flex-shrink: 0;
-      accent-color: var(--bright-blue);
-      cursor: pointer;
-    }
-    .checkbox-group a {
+    .privacy-consent a {
       color: var(--bright-blue);
       text-decoration: underline;
     }
@@ -789,14 +783,14 @@
               <input type="text" id="position" name="position" placeholder="例: 部長">
             </div>
 
-            <!-- 個人情報の取り扱い同意 -->
-            <div class="checkbox-group">
-              <label>
-                <input type="checkbox" id="agree" name="agree" required>
-                <span>個人情報の取り扱いに同意する</span>
-              </label>
-              <div class="inline-error" id="error-agree"></div>
+            <!-- 問い合わせ内容 -->
+            <div class="input-group">
+              <label for="message">問い合わせ内容</label>
+              <textarea id="message" name="message" rows="4" placeholder="ご質問やご要望があればご記入ください"></textarea>
             </div>
+
+            <!-- プライバシーポリシー同意文言 -->
+            <p class="privacy-consent">以下のボタンを押すと、<a href="/privacy/" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>に同意したものとみなされます。</p>
 
             <!-- 送信ボタン -->
             <button type="submit" class="submit-btn" id="submitBtn">資料をダウンロード</button>
@@ -951,12 +945,6 @@
         valid = false;
       }
 
-      // 同意チェック
-      if (!form.agree.checked) {
-        showError('agree', '個人情報の取り扱いに同意してください');
-        valid = false;
-      }
-
       return valid;
     }
 
@@ -979,7 +967,8 @@
         phone: form.phone.value.trim(),
         employees: form.employees.value || '',
         department: form.department.value.trim() || '',
-        position: form.position.value.trim() || ''
+        position: form.position.value.trim() || '',
+        message: form.message.value.trim() || ''
       };
 
       fetch(GAS_URL, {
