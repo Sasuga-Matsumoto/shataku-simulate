@@ -439,6 +439,13 @@
       color: var(--text-light);
       line-height: 1.85;
     }
+    .merit-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 20px auto 0;
+      border-radius: 12px;
+    }
     .merit-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -670,7 +677,7 @@
     }
 
     /* ===== 5. Pain → Solution ===== */
-    .pain-solution { background: white; }
+    .pain-solution { background: var(--bg); }
     .pain-cards {
       display: grid;
       grid-template-columns: 1fr;
@@ -764,7 +771,7 @@
     }
 
     /* ===== 6. Service Detail ===== */
-    .service-detail { background: var(--bg); }
+    .service-detail { background: white; }
     .service-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -1021,7 +1028,7 @@
     <div class="hero-glow"></div>
     <div class="inner">
       <div class="hero-label">PLEX EMPLOYEE BENEFITS</div>
-      <h1 class="hero-title">企業負担ゼロで従業員の手取りを増やす<br>次世代の福利厚生</h1>
+      <h1 class="hero-title">企業負担ゼロで従業員の手取りを増やす<br>新しい福利厚生</h1>
       <div class="hero-sub-pitch">
         <span>初期費用 0円</span>
         <span>手間なし</span>
@@ -1048,7 +1055,8 @@
           <div class="merit-block-label">従業員のメリット</div>
           <div class="merit-card card-employee">
             <h3>社宅の仕組みで従業員は手取りアップ。<br>会社は実質無料で導入可能！</h3>
-            <p>福利厚生の中でも人気の高い「社宅」の仕組みを活用。社員の個人契約の賃貸を法人名義に切り替えるだけで、引越し不要で手取りが年間最大33万円アップします。</p>
+            <p>福利厚生の中でも人気の高い「社宅」の仕組みを活用。社員の個人契約の賃貸を法人名義に切り替えるだけで、引越し不要で手取りが年間20万〜50万円アップします。</p>
+            <img src="merit_1.png" alt="借上社宅の利用で実質の年収が5〜10%UP" width="1920" height="1440" loading="lazy">
           </div>
         </div>
         <!-- Company merit -->
@@ -1057,7 +1065,119 @@
           <div class="merit-card card-company">
             <h3>PLEX福利厚生社宅の導入で<br>離職率改善！</h3>
             <p>福利厚生社宅を導入することで、離職率は1/3程度への低下が期待でき、採用面でも良い影響が期待できます。また、社会保険料のコスト削減も。</p>
+            <img src="merit_2.png" alt="制度利用者の離職率は平均の1/3（13.3%→4.3%）" width="1920" height="1440" loading="lazy">
           </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="mid-cta fade-in">
+        <div class="cta-group">
+          <a href="download/" class="btn btn-primary">資料ダウンロード</a>
+          <a href="/contact/" class="btn btn-outline-blue">お問い合わせ</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Pain → Solution ===== -->
+  <section class="section pain-solution" id="pain">
+    <div class="inner">
+      <div class="section-center fade-in">
+        <div class="section-label">SOLUTION</div>
+        <h2 class="section-title">こんなお悩みありませんか？</h2>
+      </div>
+
+      <div class="pain-cards fade-in">
+        <div class="pain-card">
+          <div class="pain-icon">!</div>
+          <p>賃上げ圧力が高まっているが<br>原資が限られている</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">!</div>
+          <p>せっかく採用した人材が<br>好待遇の企業に転職してしまう</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">!</div>
+          <p>福利厚生を強化したいが<br>何から始めればいいか分からない</p>
+        </div>
+      </div>
+
+      <div class="solution-arrow fade-in">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </div>
+
+      <div class="section-center fade-in">
+        <h3 class="section-title" style="font-size: 1.3rem;">福利厚生社宅のお悩みをPLEXが解決します！</h3>
+      </div>
+
+      <div class="solution-cards fade-in">
+        <div class="solution-card">
+          <div class="solution-num">01</div>
+          <h4>給料を上げずに手取りアップ<br>社会保険の仕組みを活用</h4>
+          <p>給与の一部を社宅提供に切り替えることで、社会保険料・税金の負担を軽減し、実質的な手取りをアップさせます。</p>
+        </div>
+        <div class="solution-card">
+          <div class="solution-num">02</div>
+          <h4>福利厚生の充実で定着率向上<br>離職率を1/3に改善</h4>
+          <p>従業員の実質手取りが年間20万〜50万円アップ。目に見える待遇改善で離職を防ぎます。</p>
+        </div>
+        <div class="solution-card">
+          <div class="solution-num">03</div>
+          <h4>手続きはすべてお任せ<br>最短1週間で導入</h4>
+          <p>名義変更から社宅規定の整備まで、導入に必要な手続きはすべてPLEXが代行。担当者の負担はほぼゼロです。</p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="mid-cta fade-in">
+        <div class="cta-group">
+          <a href="download/" class="btn btn-primary">資料ダウンロード</a>
+          <a href="/contact/" class="btn btn-outline-blue">お問い合わせ</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Service Detail ===== -->
+  <section class="section service-detail" id="service">
+    <div class="inner">
+      <div class="section-center fade-in">
+        <div class="section-label">SERVICE</div>
+        <h2 class="section-title">導入から運用まで、すべてお任せください</h2>
+        <p class="section-desc">申請から契約手続き、従業員説明まで、面倒な作業はすべてPLEXが代行します。</p>
+      </div>
+
+      <div class="service-grid">
+        <div class="service-card fade-in">
+          <div class="service-card-num">01</div>
+          <h4>社内規程の整備</h4>
+          <p>制度導入に必要な規程類をパッケージでご提供。専門知識は不要。</p>
+        </div>
+        <div class="service-card fade-in delay-1">
+          <div class="service-card-num">02</div>
+          <h4>従業員説明会</h4>
+          <p>制度説明の場を設け、メリットや注意事項を従業員に直接ご説明。</p>
+        </div>
+        <div class="service-card fade-in delay-2">
+          <div class="service-card-num">03</div>
+          <h4>利用希望者対応</h4>
+          <p>従業員からの利用申請はLINEで簡単に。書類提出もスマホで完結。</p>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-card-num">04</div>
+          <h4>名義変更手続き</h4>
+          <p>個人契約から法人名義への切り替えをすべて代行。引越し不要。</p>
+        </div>
+        <div class="service-card fade-in delay-1">
+          <div class="service-card-num">05</div>
+          <h4>更新・退去手続き</h4>
+          <p>契約更新や退去時の手続きもPLEXが代行。管理業務の負担ゼロ。</p>
+        </div>
+        <div class="service-card fade-in delay-2">
+          <div class="service-card-num">06</div>
+          <h4>給与計算・家賃支払い</h4>
+          <p>社宅控除の給与天引き設定をご案内。毎月の家賃支払いもサポート。</p>
         </div>
       </div>
 
@@ -1156,107 +1276,12 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ===== Pain → Solution ===== -->
-  <section class="section pain-solution" id="pain">
-    <div class="inner">
-      <div class="section-center fade-in">
-        <div class="section-label">SOLUTION</div>
-        <h2 class="section-title">こんなお悩みありませんか？</h2>
-      </div>
-
-      <div class="pain-cards fade-in">
-        <div class="pain-card">
-          <div class="pain-icon">!</div>
-          <p>賃上げ圧力が高まっているが<br>原資が限られている</p>
-        </div>
-        <div class="pain-card">
-          <div class="pain-icon">!</div>
-          <p>せっかく採用した人材が<br>好待遇の企業に転職してしまう</p>
-        </div>
-        <div class="pain-card">
-          <div class="pain-icon">!</div>
-          <p>福利厚生を強化したいが<br>何から始めればいいか分からない</p>
-        </div>
-      </div>
-
-      <div class="solution-arrow fade-in">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-      </div>
-
-      <div class="section-center fade-in">
-        <h3 class="section-title" style="font-size: 1.3rem;">福利厚生社宅のお悩みをPLEXが解決します！</h3>
-      </div>
-
-      <div class="solution-cards fade-in">
-        <div class="solution-card">
-          <div class="solution-num">01</div>
-          <h4>給料を上げずに手取りアップ<br>社会保険の仕組みを活用</h4>
-          <p>給与の一部を社宅提供に切り替えることで、社会保険料・税金の負担を軽減し、実質的な手取りをアップさせます。</p>
-        </div>
-        <div class="solution-card">
-          <div class="solution-num">02</div>
-          <h4>福利厚生の充実で定着率向上<br>離職率を1/3に改善</h4>
-          <p>従業員の実質手取りが年間15〜50万円アップ。目に見える待遇改善で離職を防ぎます。</p>
-        </div>
-        <div class="solution-card">
-          <div class="solution-num">03</div>
-          <h4>手続きはすべてお任せ<br>最短1週間で導入</h4>
-          <p>名義変更から社宅規定の整備まで、導入に必要な手続きはすべてPLEXが代行。担当者の負担はほぼゼロです。</p>
-        </div>
-      </div>
 
       <!-- CTA -->
       <div class="mid-cta fade-in">
         <div class="cta-group">
           <a href="download/" class="btn btn-primary">資料ダウンロード</a>
           <a href="/contact/" class="btn btn-outline-blue">お問い合わせ</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Service Detail ===== -->
-  <section class="section service-detail" id="service">
-    <div class="inner">
-      <div class="section-center fade-in">
-        <div class="section-label">SERVICE</div>
-        <h2 class="section-title">導入から運用まで、すべてお任せください</h2>
-        <p class="section-desc">申請から契約手続き、従業員説明まで、面倒な作業はすべてPLEXが代行します。</p>
-      </div>
-
-      <div class="service-grid">
-        <div class="service-card fade-in">
-          <div class="service-card-num">01</div>
-          <h4>名義変更手続き代行</h4>
-          <p>個人契約から法人名義への切り替えをすべて代行。引越し不要。</p>
-        </div>
-        <div class="service-card fade-in delay-1">
-          <div class="service-card-num">02</div>
-          <h4>社宅規定の作成</h4>
-          <p>社宅制度に必要な規定類の作成をサポート。専門知識は不要。</p>
-        </div>
-        <div class="service-card fade-in delay-2">
-          <div class="service-card-num">03</div>
-          <h4>給与計算サポート</h4>
-          <p>社宅控除の給与天引き設定をご案内。毎月の家賃支払いも不要に。</p>
-        </div>
-        <div class="service-card fade-in">
-          <div class="service-card-num">04</div>
-          <h4>従業員説明会サポート</h4>
-          <p>制度説明の場を設け、メリットや注意事項を従業員に直接ご説明。</p>
-        </div>
-        <div class="service-card fade-in delay-1">
-          <div class="service-card-num">05</div>
-          <h4>LINE対応の申請フロー</h4>
-          <p>従業員からの利用申請はLINEで簡単に。書類提出もスマホで完結。</p>
-        </div>
-        <div class="service-card fade-in delay-2">
-          <div class="service-card-num">06</div>
-          <h4>更新・退去手続き代行</h4>
-          <p>契約更新や退去時の手続きもPLEXが代行。管理業務の負担ゼロ。</p>
         </div>
       </div>
     </div>
@@ -1335,10 +1360,6 @@
             <li><a href="#faq">よくある質問</a></li>
             <li><a href="/contact/">お問い合わせ</a></li>
           </ul>
-          <div class="footer-contact" style="margin-top: 16px;">
-            TEL: <a href="tel:08067282695">080-6728-2695</a><br>
-            Email: <a href="mailto:shataku@plex.co.jp">shataku@plex.co.jp</a>
-          </div>
         </div>
       </div>
       <div class="footer-bottom">
