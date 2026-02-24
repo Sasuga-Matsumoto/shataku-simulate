@@ -616,6 +616,59 @@
       margin-top: 4px;
     }
 
+    /* Breakdown card */
+    .sim-breakdown-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 24px 20px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(30,58,138,0.07);
+      max-width: 540px;
+      margin: 16px auto 0;
+    }
+    .breakdown-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .breakdown-table th {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      font-weight: 600;
+      padding: 0 0 8px;
+      text-align: right;
+    }
+    .breakdown-table th:first-child { text-align: left; }
+    .breakdown-table td {
+      padding: 8px 0;
+      border-top: 1px solid #F1F5F9;
+      text-align: right;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-weight: 500;
+    }
+    .breakdown-table td:first-child {
+      text-align: left;
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text-light);
+      font-size: 0.82rem;
+    }
+    .bd-arrow { text-align: center !important; color: #94A3B8; font-size: 0.8rem; padding: 8px 4px !important; }
+    .bd-total td { border-top: 2px solid var(--dark-blue); font-weight: 700; color: var(--dark-blue); }
+    .bd-diff {
+      text-align: center;
+      margin-top: 16px;
+      padding: 10px;
+      background: linear-gradient(135deg, rgba(30,58,138,0.06) 0%, rgba(51,102,255,0.06) 100%);
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+    }
+    .bd-diff span {
+      font-family: 'IBM Plex Sans', sans-serif;
+      color: var(--bright-blue);
+    }
+
     /* ===== 5. Pain → Solution ===== */
     .pain-solution { background: white; }
     .pain-cards {
@@ -1030,7 +1083,7 @@
       <div class="sim-form-card fade-in">
         <div style="font-size: 0.92rem; font-weight: 700; color: var(--dark-blue); margin-bottom: 20px;">条件を入力してください</div>
         <div class="input-group">
-          <label for="sim-salary">月給</label>
+          <label for="sim-salary">月給（額面）</label>
           <select id="sim-salary">
             <option value="250000">25万円</option>
             <option value="300000" selected>30万円</option>
@@ -1053,9 +1106,9 @@
         </div>
         <button class="calc-btn" id="sim-calc">計算する</button>
         <div class="sim-notes">
-          ※ 家賃額は給与の25%相当と仮定<br>
-          ※ 会社負担額は70%とし、残りの30%は天引き<br>
-          ※ 扶養等の控除は考慮しない
+          ※ 家賃額は月給の25%相当と仮定<br>
+          ※ 会社負担額は家賃の80%、残りの20%は従業員天引き<br>
+          ※ 賞与なし・扶養等の控除は考慮しない
         </div>
       </div>
 
@@ -1073,9 +1126,26 @@
             <div class="result-item">
               <div class="r-label">会社負担 社会保険料 年間削減額</div>
               <div class="r-value"><span id="res-shaho">0</span><span class="r-unit">円/年</span></div>
-              <div class="r-sub">1人あたり約15,000円 × <span id="res-count2">0</span>人</div>
+              <div class="r-sub">1人あたり<span id="res-shaho-per">0</span>円 × <span id="res-count2">0</span>人</div>
             </div>
           </div>
+        </div>
+
+        <!-- Breakdown -->
+        <div class="sim-breakdown-card" id="sim-breakdown">
+          <div style="font-size: 0.88rem; font-weight: 700; color: var(--dark-blue); margin-bottom: 16px;">1人あたり月額内訳</div>
+          <table class="breakdown-table">
+            <thead>
+              <tr><th></th><th>利用前</th><th></th><th>利用後</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>月収（額面）</td><td id="bd-salary-before">-</td><td class="bd-arrow">&rarr;</td><td id="bd-salary-after">-</td></tr>
+              <tr><td>税金・社保</td><td id="bd-tax-before">-</td><td class="bd-arrow">&rarr;</td><td id="bd-tax-after">-</td></tr>
+              <tr><td>家賃負担</td><td id="bd-rent-before">-</td><td class="bd-arrow">&rarr;</td><td id="bd-rent-after">-</td></tr>
+              <tr class="bd-total"><td>実質手取り</td><td id="bd-net-before">-</td><td class="bd-arrow">&rarr;</td><td id="bd-net-after">-</td></tr>
+            </tbody>
+          </table>
+          <div class="bd-diff">月 <span id="bd-diff-monthly">+0</span>円 / 年 <span id="bd-diff-annual">+0</span>円 手取りアップ</div>
         </div>
 
         <!-- CTA after results -->
@@ -1334,28 +1404,115 @@
     });
 
     /* ===== Simulator ===== */
-    const SIM_DATA = {
-      250000: 150000,
-      300000: 171000,
-      350000: 195000,
-      400000: 218000,
-      500000: 328000,
-      600000: 393600,
-      700000: 459200,
-      800000: 524800,
-      900000: 590400
-    };
-    const SHAHO_PER_PERSON = 15000;
+    // 標準報酬月額テーブル [標準報酬月額, 下限, 上限, 健保折半額, 厚年折半額]
+    const SST=[
+      [58000,0,63000,2873.9,8052],[68000,63000,73000,3369.4,8052],
+      [78000,73000,83000,3864.9,8052],[88000,83000,93000,4360.4,8052],
+      [98000,93000,101000,4855.9,8967],[104000,101000,107000,5153.2,9516],
+      [110000,107000,114000,5450.5,10065],[118000,114000,122000,5846.9,10797],
+      [126000,122000,130000,6243.3,11529],[134000,130000,138000,6639.7,12261],
+      [142000,138000,146000,7036.1,12993],[150000,146000,155000,7432.5,13725],
+      [160000,155000,165000,7928,14640],[170000,165000,175000,8423.5,15555],
+      [180000,175000,185000,8919,16470],[190000,185000,195000,9414.5,17385],
+      [200000,195000,210000,9910,18300],[220000,210000,230000,10901,20130],
+      [240000,230000,250000,11892,21960],[260000,250000,270000,12883,23790],
+      [280000,270000,290000,13874,25620],[300000,290000,310000,14865,27450],
+      [320000,310000,330000,15856,29280],[340000,330000,350000,16847,31110],
+      [360000,350000,370000,17838,32940],[380000,370000,395000,18829,34770],
+      [410000,395000,425000,20315.5,37515],[440000,425000,455000,21802,40260],
+      [470000,455000,485000,23288.5,43005],[500000,485000,515000,24775,45750],
+      [530000,515000,545000,26261.5,48495],[560000,545000,575000,27748,51240],
+      [590000,575000,605000,29234.5,53985],[620000,605000,635000,30721,56730],
+      [650000,635000,665000,32207.5,59475],[680000,665000,695000,33694,59475],
+      [710000,695000,730000,35180.5,59475],[750000,730000,770000,37162.5,59475],
+      [790000,770000,810000,39144.5,59475],[830000,810000,855000,41126.5,59475],
+      [880000,855000,905000,43604,59475],[930000,905000,955000,46081.5,59475],
+      [980000,955000,1005000,48559,59475],[1030000,1005000,1055000,51036.5,59475],
+      [1090000,1055000,1115000,54009.5,59475],[1150000,1115000,1175000,56982.5,59475],
+      [1210000,1175000,1235000,59955.5,59475],[1270000,1235000,1295000,62928.5,59475],
+      [1330000,1295000,1355000,65901.5,59475],[1390000,1355000,Infinity,68874.5,59475]
+    ];
 
-    function formatNum(n) {
-      return Math.round(n).toLocaleString('ja-JP');
+    // 標準報酬月額から健保・厚年の折半額を取得
+    function lookupIns(salary) {
+      for (const r of SST) { if (salary < r[2]) return { health: r[3], pension: r[4] }; }
+      const l = SST[SST.length-1]; return { health: l[3], pension: l[4] };
     }
 
-    document.getElementById('sim-calc').addEventListener('click', () => {
-      const salary = parseInt(document.getElementById('sim-salary').value, 10);
-      const countRaw = document.getElementById('sim-count').value.replace(/[^0-9]/g, '');
-      const count = parseInt(countRaw, 10);
-      const errEl = document.getElementById('sim-error');
+    // 給与所得控除を適用して給与所得を算出
+    function getEarnedIncome(annualIncome) {
+      if (annualIncome <= 0) return 0;
+      let v;
+      if (annualIncome <= 1900000) v = annualIncome - 650000;
+      else if (annualIncome <= 3600000) v = annualIncome * 0.7 - 80000;
+      else if (annualIncome <= 6600000) v = annualIncome * 0.8 - 440000;
+      else if (annualIncome <= 8500000) v = annualIncome * 0.9 - 1100000;
+      else v = annualIncome - 1950000;
+      return Math.max(0, v);
+    }
+
+    // 所得税の基礎控除（令和7年/8年分）
+    function getBasicDeductionIT(earned) {
+      if (earned < 1320000) return 950000;
+      if (earned < 3360000) return 880000;
+      if (earned < 4890000) return 680000;
+      if (earned < 6550000) return 630000;
+      if (earned < 23500000) return 580000;
+      if (earned < 24000000) return 480000;
+      if (earned < 24500000) return 320000;
+      if (earned < 25000000) return 160000;
+      return 0;
+    }
+
+    // 所得税額（累進課税）
+    function getIncomeTax(taxable) {
+      if (taxable <= 0) return 0;
+      if (taxable <= 1949000) return taxable * 0.05;
+      if (taxable <= 3299000) return taxable * 0.10 - 97500;
+      if (taxable <= 6949000) return taxable * 0.20 - 427500;
+      if (taxable <= 8999000) return taxable * 0.23 - 636000;
+      if (taxable <= 17999000) return taxable * 0.33 - 1536000;
+      if (taxable <= 39999000) return taxable * 0.40 - 2796000;
+      return taxable * 0.45 - 4796000;
+    }
+
+    // 1人分の手取り詳細を計算
+    function calcDetails(monthlySalary, rent, reductionRate) {
+      var effSalary = monthlySalary - rent * reductionRate;
+      var annual = effSalary * 12;
+      var ins = lookupIns(effSalary);
+      var empIns = effSalary * 0.006; // 雇用保険（従業員負担）
+      var monthSI = ins.health + ins.pension + empIns;
+      var annualSI = monthSI * 12;
+      var earned = getEarnedIncome(annual);
+      // 住民税
+      var taxableRes = Math.max(0, earned - annualSI - 430000);
+      var resTax = taxableRes * 0.1 + 5000;
+      // 所得税
+      var basicIT = getBasicDeductionIT(earned);
+      var taxableIT = Math.max(0, earned - annualSI - basicIT);
+      var incTax = Math.max(0, getIncomeTax(taxableIT));
+      // 従業員家賃負担
+      var empRent = rent * (1 - reductionRate);
+      // 年間手取り
+      var annualTakeHome = annual - annualSI - resTax - incTax;
+      return {
+        effSalary: effSalary, monthSI: monthSI,
+        monthlyResTax: resTax / 12, monthlyIncTax: incTax / 12,
+        monthlyTakeHome: annualTakeHome / 12, empRent: empRent,
+        companyHP: (ins.health + ins.pension) * 12
+      };
+    }
+
+    function formatNum(n) { return Math.round(n).toLocaleString('ja-JP'); }
+    function formatMan(n) { return (Math.round(n / 1000) / 10).toFixed(1); }
+
+    document.getElementById('sim-calc').addEventListener('click', function() {
+      var salary = parseInt(document.getElementById('sim-salary').value, 10);
+      var rent = Math.round(salary / 4);
+      var countRaw = document.getElementById('sim-count').value.replace(/[^0-9]/g, '');
+      var count = parseInt(countRaw, 10);
+      var errEl = document.getElementById('sim-error');
 
       if (!count || count < 1) {
         errEl.textContent = '利用人数を1以上の半角数字で入力してください。';
@@ -1367,21 +1524,45 @@
       }
       errEl.textContent = '';
 
-      const tedori = SIM_DATA[salary] || 0;
-      const shahoTotal = SHAHO_PER_PERSON * count;
-      const tedoriTotal = tedori * count;
+      var before = calcDetails(salary, 0, 0);
+      var after = calcDetails(salary, rent, 0.8);
 
-      document.getElementById('res-tedori').textContent = '+' + formatNum(tedori);
+      var beforeNet = before.monthlyTakeHome - rent;
+      var afterNet = after.monthlyTakeHome - after.empRent;
+      var monthlyDiff = afterNet - beforeNet;
+      var annualDiff = monthlyDiff * 12;
+
+      // 会社側社保削減額（健保＋厚年の会社負担分の差額）
+      var companySavingsPerPerson = before.companyHP - after.companyHP;
+      var companySavingsTotal = companySavingsPerPerson * count;
+
+      // ヘッドライン数値
+      document.getElementById('res-tedori').textContent = '+' + formatNum(annualDiff);
       document.getElementById('res-count').textContent = formatNum(count);
-      document.getElementById('res-tedori-total').textContent = formatNum(tedoriTotal);
-      document.getElementById('res-shaho').textContent = '-' + formatNum(shahoTotal);
+      document.getElementById('res-tedori-total').textContent = formatNum(annualDiff * count);
+      document.getElementById('res-shaho').textContent = '-' + formatNum(companySavingsTotal);
+      document.getElementById('res-shaho-per').textContent = formatNum(companySavingsPerPerson);
       document.getElementById('res-count2').textContent = formatNum(count);
 
-      const resultsEl = document.getElementById('sim-results');
+      // 内訳テーブル
+      var beforeTaxSI = before.monthSI + before.monthlyResTax + before.monthlyIncTax;
+      var afterTaxSI = after.monthSI + after.monthlyResTax + after.monthlyIncTax;
+      document.getElementById('bd-salary-before').textContent = formatMan(salary) + '万円';
+      document.getElementById('bd-salary-after').textContent = formatMan(after.effSalary) + '万円';
+      document.getElementById('bd-tax-before').textContent = formatMan(beforeTaxSI) + '万円';
+      document.getElementById('bd-tax-after').textContent = formatMan(afterTaxSI) + '万円';
+      document.getElementById('bd-rent-before').textContent = formatMan(rent) + '万円';
+      document.getElementById('bd-rent-after').textContent = formatMan(after.empRent) + '万円';
+      document.getElementById('bd-net-before').textContent = formatMan(beforeNet) + '万円';
+      document.getElementById('bd-net-after').textContent = formatMan(afterNet) + '万円';
+      document.getElementById('bd-diff-monthly').textContent = '+' + formatNum(monthlyDiff);
+      document.getElementById('bd-diff-annual').textContent = '+' + formatNum(annualDiff);
+
+      var resultsEl = document.getElementById('sim-results');
       resultsEl.style.display = 'block';
       resultsEl.style.opacity = '0';
       resultsEl.style.transform = 'translateY(16px)';
-      requestAnimationFrame(() => {
+      requestAnimationFrame(function() {
         resultsEl.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
         resultsEl.style.opacity = '1';
         resultsEl.style.transform = 'translateY(0)';
