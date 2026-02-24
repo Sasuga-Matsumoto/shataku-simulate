@@ -1,0 +1,4 @@
+file 'C:\Users\matsu\shataku\employee\slides\narr_1_padded.wav'
+file 'C:\Users\matsu\shataku\employee\slides\narr_2_padded.wav'
+file 'C:\Users\matsu\shataku\employee\slides\narr_3_padded.wav'
+file 'C:\Users\matsu\shataku\employee\slides\narr_4_padded.wav'

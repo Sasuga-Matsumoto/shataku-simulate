@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-5CKQQT2M');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1E3A8A">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+  <title>PLEX 福利厚生社宅 | 実質無料で手取りアップを実現する新しい福利厚生</title>
+  <meta name="description" content="PLEX福利厚生社宅は、社宅の仕組みを活用して従業員の手取りアップと企業の社会保険料削減を同時に実現するサービスです。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet"></noscript>
+  <style>
+    /* ===== Variables ===== */
+    :root {
+      color-scheme: light;
+      --dark-blue: #1E3A8A;
+      --bright-blue: #3366FF;
+      --accent-blue: #4A86E8;
+      --medium-blue: #6D9EEB;
+      --light-blue: #BFDBFE;
+      --bg: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --text: #0F172A;
+      --text-light: #64748B;
+      --gray: #94A3B8;
+      --off-white: #F8F5F5;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04), 0 2px 8px rgba(30,58,138,0.06);
+      --shadow-md: 0 2px 4px rgba(0,0,0,0.04), 0 8px 24px rgba(30,58,138,0.08);
+      --shadow-lg: 0 4px 8px rgba(0,0,0,0.04), 0 16px 40px rgba(30,58,138,0.12);
+    }
+
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+    body {
+      font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* ===== Scroll fade-in ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in.delay-1 { transition-delay: 0.1s; }
+    .fade-in.delay-2 { transition-delay: 0.2s; }
+    .fade-in.delay-3 { transition-delay: 0.3s; }
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== Section common ===== */
+    .section { padding: 72px 20px; }
+    .inner { max-width: 880px; margin: 0 auto; }
+    .section-label {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--bright-blue);
+      margin-bottom: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--bright-blue), rgba(51,102,255,0.2));
+      border-radius: 2px;
+    }
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--dark-blue);
+      line-height: 1.35;
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
+      text-wrap: balance;
+    }
+    .section-desc {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.8;
+      text-wrap: pretty;
+    }
+    .section-center { text-align: center; }
+
+    /* ===== 1. Header ===== */
+    .header {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(30,58,138,0.08);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 0 rgba(30,58,138,0.06), 0 4px 16px rgba(30,58,138,0.04);
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .header-logo {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+    .header-logo span { color: var(--bright-blue); }
+
+    /* Desktop nav */
+    .header-nav {
+      display: none;
+      list-style: none;
+      gap: 24px;
+      align-items: center;
+    }
+    .header-nav a {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .header-nav a:hover { color: var(--bright-blue); }
+
+    /* Hamburger */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      z-index: 200;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--dark-blue);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(16px);
+      z-index: 150;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+    }
+    .mobile-menu.active { display: flex; }
+    .mobile-menu a {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+      text-decoration: none;
+    }
+    .mobile-menu a:hover { color: var(--bright-blue); }
+
+    @media (min-width: 768px) {
+      .header-nav { display: flex; }
+      .hamburger { display: none; }
+    }
+
+    /* ===== 2. Hero ===== */
+    .hero {
+      background: linear-gradient(155deg, #0f1f5c 0%, #1E3A8A 45%, #2952b3 100%);
+      color: white;
+      padding: 80px 20px 88px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(51,102,255,0.3) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-glow {
+      position: absolute;
+      bottom: -100px; left: -80px;
+      width: 340px; height: 340px;
+      background: radial-gradient(circle, rgba(164,194,244,0.15) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero .inner { position: relative; z-index: 1; }
+    .hero-label {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-size: 1.7rem;
+      font-weight: 900;
+      line-height: 1.45;
+      letter-spacing: -0.01em;
+      margin-bottom: 24px;
+    }
+    .hero-sub-pitch {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+      margin-top: 24px;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.8);
+    }
+    .hero-sub-pitch span {
+      padding: 0 16px;
+      white-space: nowrap;
+    }
+    .hero-sub-pitch span:not(:last-child) {
+      border-right: 1px solid rgba(255,255,255,0.3);
+    }
+    .hero-note {
+      font-size: 0.72rem;
+      opacity: 0.6;
+      line-height: 1.6;
+      max-width: 520px;
+      margin: 0 auto;
+      margin-top: 24px;
+    }
+    @media (min-width: 768px) {
+      .hero-title { font-size: 2.2rem; }
+    }
+
+    /* ===== CTA buttons ===== */
+    .cta-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 32px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: inherit;
+      border-radius: 50px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease;
+      border: none;
+      letter-spacing: 0.02em;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -80%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+      transform: skewX(-20deg);
+    }
+    .btn:hover::after {
+      animation: btn-shimmer 0.55s ease forwards;
+    }
+    @keyframes btn-shimmer {
+      from { left: -80%; }
+      to   { left: 160%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .btn::after { display: none; }
+    }
+    .btn-primary {
+      background: #EB5600;
+      color: white;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.18), 0 2px 4px rgba(0,0,0,0.08);
+    }
+    .btn-outline {
+      background: white;
+      color: var(--bright-blue);
+      border: 2px solid white;
+    }
+    .btn-outline:hover {
+      background: #f0f0f0;
+      border-color: #f0f0f0;
+      transform: translateY(-2px);
+    }
+    .btn-outline-blue.hero-contact {
+      background: white;
+    }
+    .btn-outline-blue.hero-contact:hover {
+      background: #f0f0f0;
+      color: var(--bright-blue);
+    }
+    .btn-outline-blue {
+      background: transparent;
+      color: var(--bright-blue);
+      border: 2px solid var(--bright-blue);
+    }
+    .btn-outline-blue:hover {
+      background: var(--bright-blue);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(51,102,255,0.25);
+    }
+    .btn:active { transform: translateY(0); }
+
+    /* CTA section (blue bg) */
+    .cta-section {
+      background: linear-gradient(135deg, var(--dark-blue) 0%, #2952b3 100%);
+      padding: 48px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+    }
+    .cta-section .inner { position: relative; z-index: 1; }
+    .cta-section .cta-heading {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    /* ===== 3. Benefits / Merit ===== */
+    .merit { background: white; }
+    .merit-block {
+      margin-top: 40px;
+      margin-bottom: 32px;
+    }
+    .merit-block-label {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--dark-blue), var(--bright-blue));
+      color: white;
+      padding: 5px 16px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+    }
+    .merit-card {
+      background: white;
+      border-radius: 20px;
+      padding: 32px 24px;
+      border: 1px solid rgba(30,58,138,0.07);
+      border-top: 4px solid var(--bright-blue);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 4px 16px rgba(30,58,138,0.06), 0 12px 32px rgba(30,58,138,0.05);
+      transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s ease;
+    }
+    .merit-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 8px 24px rgba(30,58,138,0.10), 0 24px 48px rgba(30,58,138,0.13);
+    }
+    .merit-card.card-employee { border-top-color: var(--bright-blue); }
+    .merit-card.card-company { border-top-color: #0284C7; }
+    .merit-card h3 {
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--dark-blue);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    .merit-card p {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      line-height: 1.85;
+    }
+    .merit-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    @media (min-width: 640px) {
+      .merit-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ===== 4. Simulator ===== */
+    .simulator { background: var(--bg); }
+    .sim-form-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 32px 24px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(30,58,138,0.07);
+      margin-top: 28px;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .input-group { margin-bottom: 18px; }
+    .input-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-light);
+      margin-bottom: 6px;
+    }
+    .input-with-unit { display: flex; align-items: center; gap: 8px; }
+    .input-with-unit input { flex: 1; min-width: 0; }
+    .input-unit {
+      font-size: 15px;
+      color: #999;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .input-group input,
+    .input-group select {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 16px;
+      font-family: inherit;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 10px;
+      background: white;
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .input-group input:hover,
+    .input-group select:hover { border-color: #94A3B8; }
+    .input-group select {
+      -webkit-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2323418C' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 38px;
+    }
+    .input-group input:focus,
+    .input-group select:focus {
+      outline: none;
+      border-color: var(--bright-blue);
+      box-shadow: 0 0 0 3px rgba(51,102,255,0.12), 0 1px 4px rgba(51,102,255,0.12);
+    }
+    .calc-btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      margin-top: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      font-family: inherit;
+      color: white;
+      background: linear-gradient(135deg, var(--dark-blue) 0%, var(--bright-blue) 100%);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease, opacity 0.18s;
+      box-shadow: 0 2px 8px rgba(51,102,255,0.25), 0 1px 2px rgba(0,0,0,0.08);
+    }
+    .calc-btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -80%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+      transform: skewX(-20deg);
+    }
+    .calc-btn:hover::after { animation: btn-shimmer 0.55s ease forwards; }
+    .calc-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(51,102,255,0.38), 0 2px 4px rgba(0,0,0,0.08);
+    }
+    .calc-btn:active { opacity: 0.88; transform: translateY(0); }
+    .inline-error {
+      color: #DC2626;
+      font-size: 0.8rem;
+      min-height: 1.2em;
+      margin-top: 4px;
+    }
+    .sim-notes {
+      font-size: 0.72rem;
+      color: #999;
+      line-height: 1.7;
+      margin-top: 16px;
+    }
+
+    /* Sim results */
+    #sim-results { display: none; margin-top: 28px; }
+    .sim-results-card {
+      background: linear-gradient(135deg, var(--dark-blue) 0%, #2952b3 100%);
+      border-radius: 20px;
+      padding: 32px 24px;
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+    .sim-results-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size: 22px 22px;
+      pointer-events: none;
+    }
+    .sim-results-card > * { position: relative; }
+    .result-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      font-weight: 700;
+      font-size: 0.78rem;
+      padding: 4px 16px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      letter-spacing: 0.06em;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    .result-row {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .result-divider {
+      width: 1px;
+      background: rgba(255,255,255,0.25);
+      align-self: stretch;
+    }
+    .result-item { text-align: center; }
+    .result-item .r-label {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 6px;
+    }
+    .result-item .r-value {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.02em;
+    }
+    .result-item .r-unit { font-size: 1rem; font-weight: 500; color: rgba(255,255,255,0.85); }
+    .result-item .r-sub {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.6);
+      margin-top: 4px;
+    }
+
+    /* ===== 5. Pain → Solution ===== */
+    .pain-solution { background: white; }
+    .pain-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .pain-card {
+      background: #FEF3F2;
+      border-radius: 16px;
+      padding: 20px 22px;
+      border-left: 4px solid #EF4444;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .pain-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      background: #FEE2E2;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: #EF4444;
+    }
+    .pain-card p {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .solution-arrow {
+      text-align: center;
+      padding: 28px 0;
+    }
+    .solution-arrow svg {
+      width: 40px;
+      height: 40px;
+      color: var(--bright-blue);
+      animation: bounce 1.5s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .solution-arrow svg { animation: none; }
+    }
+    .solution-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .solution-card {
+      background: white;
+      border-radius: 20px;
+      padding: 24px 22px;
+      border: 1px solid rgba(30,58,138,0.07);
+      border-top: 4px solid var(--bright-blue);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s ease;
+    }
+    .solution-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+    .solution-num {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--bright-blue);
+      margin-bottom: 6px;
+    }
+    .solution-card h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+    .solution-card p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.75;
+    }
+    @media (min-width: 640px) {
+      .pain-cards { grid-template-columns: repeat(3, 1fr); }
+      .solution-cards { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ===== 6. Service Detail ===== */
+    .service-detail { background: var(--bg); }
+    .service-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .service-card {
+      background: white;
+      border-radius: 20px;
+      padding: 28px 24px;
+      border: 1px solid rgba(30,58,138,0.07);
+      border-top: 4px solid var(--accent-blue);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+    .service-card-num {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+      margin-bottom: 8px;
+    }
+    .service-card h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+      margin-bottom: 10px;
+    }
+    .service-card p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.75;
+    }
+    @media (min-width: 640px) {
+      .service-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (min-width: 960px) {
+      .service-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ===== 7. FAQ ===== */
+    .faq { background: white; }
+    .faq-list {
+      margin-top: 32px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .faq-item {
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 20px 40px 20px 0;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text);
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      line-height: 1.6;
+      position: relative;
+      transition: color 0.2s;
+    }
+    .faq-question:hover { color: var(--bright-blue); }
+    .faq-question::after {
+      content: '+';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--gray);
+      transition: transform 0.3s;
+      font-family: 'IBM Plex Sans', sans-serif;
+    }
+    .faq-item.active .faq-question::after {
+      content: '\2212';
+      transform: translateY(-50%);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .faq-answer-inner {
+      padding: 0 0 20px;
+      font-size: 0.88rem;
+      color: var(--text-light);
+      line-height: 1.85;
+    }
+
+    /* ===== 8. Final CTA ===== */
+    .final-cta {
+      background: linear-gradient(155deg, #0f1f5c 0%, #1E3A8A 45%, #2952b3 100%);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+    }
+    .final-cta::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; right: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(51,102,255,0.25) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .final-cta .inner { position: relative; z-index: 1; }
+    .final-cta h2 {
+      font-size: 1.6rem;
+      font-weight: 900;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+    .final-cta p {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      line-height: 1.8;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    @media (min-width: 768px) {
+      .final-cta h2 { font-size: 2rem; }
+      .final-cta p { white-space: nowrap; }
+    }
+
+    /* ===== 9. Footer ===== */
+    .footer {
+      background: #0F172A;
+      color: rgba(255,255,255,0.7);
+      padding: 48px 20px 32px;
+    }
+    .footer-inner {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      margin-bottom: 32px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .footer-logo-text {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: white;
+    }
+    .footer-company {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 4px;
+    }
+    .footer-nav {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 24px;
+    }
+    .footer-nav a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-nav a:hover { color: white; }
+    .footer-contact {
+      font-size: 0.82rem;
+      line-height: 1.8;
+    }
+    .footer-contact a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+    }
+    .footer-contact a:hover { color: white; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 20px;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.35);
+      text-align: center;
+    }
+    @media (min-width: 640px) {
+      .footer-top { flex-direction: row; justify-content: space-between; align-items: flex-start; }
+    }
+
+    /* ===== Mid-section CTA ===== */
+    .mid-cta {
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .mid-cta .cta-group { margin-top: 0; }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5CKQQT2M"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- ===== Header ===== -->
+  <header class="header">
+    <a href="#" class="header-left">
+      <div class="header-logo">PLEX <span>福利厚生社宅</span></div>
+    </a>
+    <nav>
+      <ul class="header-nav">
+        <li><a href="#merit">メリット</a></li>
+        <li><a href="#simulator">シミュレーション</a></li>
+        <li><a href="#service">サービス詳細</a></li>
+        <li><a href="#faq">よくある質問</a></li>
+        <li><a href="download/" class="btn btn-primary" style="padding: 10px 22px; font-size: 0.82rem; color: white;">資料ダウンロード</a></li>
+      </ul>
+    </nav>
+    <button class="hamburger" aria-label="メニュー" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#merit" class="mobile-menu-link">メリット</a>
+    <a href="#simulator" class="mobile-menu-link">シミュレーション</a>
+    <a href="#service" class="mobile-menu-link">サービス詳細</a>
+    <a href="#faq" class="mobile-menu-link">よくある質問</a>
+    <a href="#contact" class="mobile-menu-link">お問い合わせ</a>
+  </div>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="inner">
+      <div class="hero-label">PLEX EMPLOYEE BENEFITS</div>
+      <h1 class="hero-title">企業負担ゼロで従業員の手取りを増やす<br>次世代の福利厚生</h1>
+      <div class="hero-sub-pitch">
+        <span>初期費用 0円</span>
+        <span>手間なし</span>
+        <span>1週間で導入可能</span>
+      </div>
+      <div class="cta-group">
+        <a href="download/" class="btn btn-primary">資料ダウンロード</a>
+        <a href="#contact" class="btn btn-outline-blue hero-contact">お問い合わせ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Merit ===== -->
+  <section class="section merit" id="merit">
+    <div class="inner">
+      <div class="section-center fade-in">
+        <div class="section-label">MERIT</div>
+        <h2 class="section-title">従業員にも会社にも大きなメリット</h2>
+      </div>
+
+      <div class="merit-grid" style="margin-top: 36px;">
+        <!-- Employee merit -->
+        <div class="fade-in delay-1">
+          <div class="merit-block-label">従業員のメリット</div>
+          <div class="merit-card card-employee">
+            <h3>社宅の仕組みで従業員は手取りアップ。<br>会社は実質無料で導入可能！</h3>
+            <p>福利厚生の中でも人気の高い「社宅」の仕組みを活用。社員の個人契約の賃貸を法人名義に切り替えるだけで、引越し不要で手取りが年間最大33万円アップします。</p>
+          </div>
+        </div>
+        <!-- Company merit -->
+        <div class="fade-in delay-2">
+          <div class="merit-block-label">会社のメリット</div>
+          <div class="merit-card card-company">
+            <h3>PLEX福利厚生社宅の導入で<br>離職率改善！</h3>
+            <p>福利厚生社宅を導入することで、離職率は1/3程度への低下が期待でき、採用面でも良い影響が期待できます。また、社会保険料のコスト削減も。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="mid-cta fade-in">
+        <div class="cta-group">
+          <a href="download/" class="btn btn-primary">資料ダウンロード</a>
+          <a href="#contact" class="btn btn-outline-blue">お問い合わせ</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Simulator ===== -->
+  <section class="section simulator" id="simulator">
+    <div class="inner">
+      <div class="section-center fade-in">
+        <div class="section-label">SIMULATION</div>
+        <h2 class="section-title">会社のコスト削減シミュレーター</h2>
+        <p class="section-desc">従業員の給与と人数に合わせて、会社全体のメリットをシミュレーションできます。</p>
+      </div>
+
+      <div class="sim-form-card fade-in">
+        <div style="font-size: 0.92rem; font-weight: 700; color: var(--dark-blue); margin-bottom: 20px;">条件を入力してください</div>
+        <div class="input-group">
+          <label for="sim-salary">月給</label>
+          <select id="sim-salary">
+            <option value="250000">25万円</option>
+            <option value="300000" selected>30万円</option>
+            <option value="350000">35万円</option>
+            <option value="400000">40万円</option>
+            <option value="500000">50万円</option>
+            <option value="600000">60万円</option>
+            <option value="700000">70万円</option>
+            <option value="800000">80万円</option>
+            <option value="900000">90万円</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="sim-count">利用人数</label>
+          <div class="input-with-unit">
+            <input type="text" id="sim-count" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="例: 50" value="10">
+            <span class="input-unit">人</span>
+          </div>
+          <div class="inline-error" id="sim-error"></div>
+        </div>
+        <button class="calc-btn" id="sim-calc">計算する</button>
+        <div class="sim-notes">
+          ※ 家賃額は給与の25%相当と仮定<br>
+          ※ 会社負担額は70%とし、残りの30%は天引き<br>
+          ※ 扶養等の控除は考慮しない
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div id="sim-results">
+        <div class="sim-results-card">
+          <div class="result-badge">シミュレーション結果</div>
+          <div class="result-row">
+            <div class="result-item">
+              <div class="r-label">従業員手取り効果（1人あたり）</div>
+              <div class="r-value"><span id="res-tedori">0</span><span class="r-unit">円/年</span></div>
+              <div class="r-sub">× <span id="res-count">0</span>人 = <span id="res-tedori-total">0</span>円</div>
+            </div>
+            <div class="result-divider"></div>
+            <div class="result-item">
+              <div class="r-label">会社負担 社会保険料 年間削減額</div>
+              <div class="r-value"><span id="res-shaho">0</span><span class="r-unit">円/年</span></div>
+              <div class="r-sub">1人あたり約15,000円 × <span id="res-count2">0</span>人</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA after results -->
+        <div class="mid-cta">
+          <div class="cta-group">
+            <a href="download/" class="btn btn-primary">資料ダウンロード</a>
+            <a href="#contact" class="btn btn-outline-blue">お問い合わせ</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Pain → Solution ===== -->
+  <section class="section pain-solution" id="pain">
+    <div class="inner">
+      <div class="section-center fade-in">
+        <div class="section-label">SOLUTION</div>
+        <h2 class="section-title">こんなお悩みありませんか？</h2>
+      </div>
+
+      <div class="pain-cards fade-in">
+        <div class="pain-card">
+          <div class="pain-icon">!</div>
+          <p>賃上げ圧力が高まっているが<br>原資が限られている</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">!</div>
+          <p>せっかく採用した人材が<br>好待遇の企業に転職してしまう</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">!</div>
+          <p>福利厚生を強化したいが<br>何から始めればいいか分からない</p>
+        </div>
+      </div>
+
+      <div class="solution-arrow fade-in">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </div>
+
+      <div class="section-center fade-in">
+        <h3 class="section-title" style="font-size: 1.3rem;">福利厚生社宅のお悩みをPLEXが解決します！</h3>
+      </div>
+
+      <div class="solution-cards fade-in">
+        <div class="solution-card">
+          <div class="solution-num">01</div>
+          <h4>給料を上げずに手取りアップ<br>社会保険の仕組みを活用</h4>
+          <p>給与の一部を社宅提供に切り替えることで、社会保険料・税金の負担を軽減し、実質的な手取りをアップさせます。</p>
+        </div>
+        <div class="solution-card">
+          <div class="solution-num">02</div>
+          <h4>福利厚生の充実で定着率向上<br>離職率を1/3に改善</h4>
+          <p>従業員の実質手取りが年間15〜50万円アップ。目に見える待遇改善で離職を防ぎます。</p>
+        </div>
+        <div class="solution-card">
+          <div class="solution-num">03</div>
+          <h4>手続きはすべてお任せ<br>最短1週間で導入</h4>
+          <p>名義変更から社宅規定の整備まで、導入に必要な手続きはすべてPLEXが代行。担当者の負担はほぼゼロです。</p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="mid-cta fade-in">
+        <div class="cta-group">
+          <a href="download/" class="btn btn-primary">資料ダウンロード</a>
+          <a href="#contact" class="btn btn-outline-blue">お問い合わせ</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Service Detail ===== -->
+  <section class="section service-detail" id="service">
+    <div class="inner">
+      <div class="section-center fade-in">
+        <div class="section-label">SERVICE</div>
+        <h2 class="section-title">導入から運用まで、すべてお任せください</h2>
+        <p class="section-desc">申請から契約手続き、従業員説明まで、面倒な作業はすべてPLEXが代行します。</p>
+      </div>
+
+      <div class="service-grid">
+        <div class="service-card fade-in">
+          <div class="service-card-num">01</div>
+          <h4>名義変更手続き代行</h4>
+          <p>個人契約から法人名義への切り替えをすべて代行。引越し不要。</p>
+        </div>
+        <div class="service-card fade-in delay-1">
+          <div class="service-card-num">02</div>
+          <h4>社宅規定の作成</h4>
+          <p>社宅制度に必要な規定類の作成をサポート。専門知識は不要。</p>
+        </div>
+        <div class="service-card fade-in delay-2">
+          <div class="service-card-num">03</div>
+          <h4>給与計算サポート</h4>
+          <p>社宅控除の給与天引き設定をご案内。毎月の家賃支払いも不要に。</p>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-card-num">04</div>
+          <h4>従業員説明会サポート</h4>
+          <p>制度説明の場を設け、メリットや注意事項を従業員に直接ご説明。</p>
+        </div>
+        <div class="service-card fade-in delay-1">
+          <div class="service-card-num">05</div>
+          <h4>LINE対応の申請フロー</h4>
+          <p>従業員からの利用申請はLINEで簡単に。書類提出もスマホで完結。</p>
+        </div>
+        <div class="service-card fade-in delay-2">
+          <div class="service-card-num">06</div>
+          <h4>更新・退去手続き代行</h4>
+          <p>契約更新や退去時の手続きもPLEXが代行。管理業務の負担ゼロ。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="section faq" id="faq">
+    <div class="inner">
+      <div class="section-center fade-in">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title">よくあるご質問</h2>
+      </div>
+
+      <div class="faq-list fade-in">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a1">Q. 社宅導入時に社会保険料はどれぐらい削減できますか？</button>
+          <div class="faq-answer" id="faq-a1" role="region">
+            <div class="faq-answer-inner">条件によりますが、月給30万円・家賃8万円の場合、1人あたり年間約1〜2万円の企業側社会保険料の削減が見込めます。</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a2">Q. 従業員の手取りはどれぐらい増えますか？</button>
+          <div class="faq-answer" id="faq-a2" role="region">
+            <div class="faq-answer-inner">月給30万円の場合、年間約17〜18万円程度の手取り向上が見込めます。給与額や家賃によって変動します。</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a3">Q. 今住んでいる家を社宅にできますか？</button>
+          <div class="faq-answer" id="faq-a3" role="region">
+            <div class="faq-answer-inner">はい、現在お住まいの賃貸物件を個人名義から法人名義に変更して借上社宅とすることが可能です。引越しは不要です。</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a4">Q. 会社が家賃を負担する必要がありますか？</button>
+          <div class="faq-answer" id="faq-a4" role="region">
+            <div class="faq-answer-inner">会社が追加で家賃を支払う必要はありません。従業員の給与の一部を現物支給（社宅提供）に切り替える仕組みのため、会社の実質的な追加コストはゼロです。</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a5">Q. 導入にどれくらい時間がかかりますか？</button>
+          <div class="faq-answer" id="faq-a5" role="region">
+            <div class="faq-answer-inner">最短1週間で導入可能です。規定の作成から名義変更手続きまで、PLEXがすべてサポートいたします。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Final CTA ===== -->
+  <section class="final-cta" id="contact">
+    <div class="inner fade-in">
+      <h2>まずはお気軽にお問い合わせください</h2>
+      <p>具体的な導入効果・スケジュールについて、お客様のご状況に合わせて専任担当者がご案内いたします</p>
+      <div class="cta-group">
+        <a href="download/" class="btn btn-primary">資料ダウンロード</a>
+        <a href="#contact" class="btn btn-outline-blue hero-contact">お問い合わせ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-logo">
+            <span class="footer-logo-text">PLEX 福利厚生社宅</span>
+          </div>
+          <div class="footer-company">株式会社プレックス</div>
+        </div>
+        <div>
+          <ul class="footer-nav">
+            <li><a href="#merit">メリット</a></li>
+            <li><a href="#simulator">シミュレーション</a></li>
+            <li><a href="#service">サービス詳細</a></li>
+            <li><a href="#faq">よくある質問</a></li>
+            <li><a href="#contact">お問い合わせ</a></li>
+          </ul>
+          <div class="footer-contact" style="margin-top: 16px;">
+            TEL: <a href="tel:08067282695">080-6728-2695</a><br>
+            Email: <a href="mailto:shataku@plex.co.jp">shataku@plex.co.jp</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 株式会社プレックス All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ===== Hamburger menu ===== */
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', mobileMenu.classList.contains('active'));
+      document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+
+    /* ===== Fade-in (IntersectionObserver) ===== */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    /* ===== FAQ Accordion ===== */
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const answer = item.querySelector('.faq-answer');
+        const wasActive = item.classList.contains('active');
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('active');
+          i.querySelector('.faq-answer').style.maxHeight = '0';
+          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+        // Toggle clicked
+        if (!wasActive) {
+          item.classList.add('active');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    /* ===== Simulator ===== */
+    const SIM_DATA = {
+      250000: 150000,
+      300000: 171000,
+      350000: 195000,
+      400000: 218000,
+      500000: 328000,
+      600000: 393600,
+      700000: 459200,
+      800000: 524800,
+      900000: 590400
+    };
+    const SHAHO_PER_PERSON = 15000;
+
+    function formatNum(n) {
+      return Math.round(n).toLocaleString('ja-JP');
+    }
+
+    document.getElementById('sim-calc').addEventListener('click', () => {
+      const salary = parseInt(document.getElementById('sim-salary').value, 10);
+      const countRaw = document.getElementById('sim-count').value.replace(/[^0-9]/g, '');
+      const count = parseInt(countRaw, 10);
+      const errEl = document.getElementById('sim-error');
+
+      if (!count || count < 1) {
+        errEl.textContent = '利用人数を1以上の半角数字で入力してください。';
+        return;
+      }
+      if (count > 10000) {
+        errEl.textContent = '利用人数は10,000人以下で入力してください。';
+        return;
+      }
+      errEl.textContent = '';
+
+      const tedori = SIM_DATA[salary] || 0;
+      const shahoTotal = SHAHO_PER_PERSON * count;
+      const tedoriTotal = tedori * count;
+
+      document.getElementById('res-tedori').textContent = '+' + formatNum(tedori);
+      document.getElementById('res-count').textContent = formatNum(count);
+      document.getElementById('res-tedori-total').textContent = formatNum(tedoriTotal);
+      document.getElementById('res-shaho').textContent = '-' + formatNum(shahoTotal);
+      document.getElementById('res-count2').textContent = formatNum(count);
+
+      const resultsEl = document.getElementById('sim-results');
+      resultsEl.style.display = 'block';
+      resultsEl.style.opacity = '0';
+      resultsEl.style.transform = 'translateY(16px)';
+      requestAnimationFrame(() => {
+        resultsEl.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        resultsEl.style.opacity = '1';
+        resultsEl.style.transform = 'translateY(0)';
+      });
+
+      resultsEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  </script>
+</body>
+</html>
