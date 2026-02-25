@@ -595,6 +595,13 @@
       letter-spacing: -0.02em;
     }
     .savings-item .s-unit { font-size: 1rem; font-weight: 500; color: rgba(255,255,255,0.85); }
+    .savings-item--wide { width: 100%; }
+    .savings-divider-h {
+      height: 1px;
+      background: rgba(255,255,255,0.25);
+      margin: 12px 0 8px;
+    }
+    .s-value--5year { font-size: 2.2rem; }
 
     /* Bar chart - 3-column waterfall */
     .chart-card {
@@ -1153,6 +1160,13 @@
               <div class="s-value">+<span id="output-annual">0</span><span class="s-unit">円</span></div>
             </div>
           </div>
+          <div class="savings-divider-h"></div>
+          <div class="savings-row">
+            <div class="savings-item savings-item--wide">
+              <div class="s-label">5年間</div>
+              <div class="s-value s-value--5year">+<span id="output-5year">0</span><span class="s-unit">円</span></div>
+            </div>
+          </div>
         </div>
 
         <div class="chart-card">
@@ -1489,7 +1503,8 @@ function calculate(monthlySalary, rent, prefecture) {
     without: without,
     withSystem: withSystem,
     monthlyIncrease: Math.round(withSystem.realNetMonthly - without.realNetMonthly),
-    annualIncrease:  Math.round(withSystem.realNetMonthly - without.realNetMonthly) * 12
+    annualIncrease:  Math.round(withSystem.realNetMonthly - without.realNetMonthly) * 12,
+    fiveYearIncrease: Math.round(withSystem.realNetMonthly - without.realNetMonthly) * 12 * 5
   };
 }
 function formatYen(n) { return Math.round(n).toLocaleString('ja-JP'); }
@@ -1632,6 +1647,7 @@ function runCalculation() {
   var result = calculate(salary, rent, pref);
   document.getElementById('output-monthly').textContent = formatYen(result.monthlyIncrease);
   document.getElementById('output-annual').textContent  = formatYen(result.annualIncrease);
+  document.getElementById('output-5year').textContent   = formatYen(result.fiveYearIncrease);
   renderBars(result, rent, salary);
   renderDetailTable(result, rent, salary);
   document.getElementById('sim-results').style.display = 'block';
