@@ -964,11 +964,14 @@
         employees: form.employees.value || '',
         department: form.department.value.trim() || '',
         position: form.position.value.trim() || '',
-        message: form.message.value.trim() || ''
+        inquiry: form.message.value.trim() || '',
+        formType: '資料請求'
       };
 
       fetch(GAS_URL, {
         method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(data)
       })
       .then(() => {

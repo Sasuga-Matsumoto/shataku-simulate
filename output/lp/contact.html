@@ -816,11 +816,13 @@
         department: form.department.value.trim() || '',
         position: form.position.value.trim() || '',
         inquiry: form.inquiry.value.trim(),
-        formType: 'contact'
+        formType: 'お問い合わせ'
       };
 
       fetch(GAS_URL, {
         method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(data)
       })
       .then(() => {
