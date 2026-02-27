@@ -975,16 +975,7 @@
         body: JSON.stringify(data)
       })
       .then(() => {
-        document.getElementById('formArea').style.display = 'none';
-        const success = document.getElementById('successMessage');
-        success.style.display = 'block';
-        success.style.opacity = '0';
-        success.style.transform = 'translateY(16px)';
-        requestAnimationFrame(() => {
-          success.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-          success.style.opacity = '1';
-          success.style.transform = 'translateY(0)';
-        });
+        window.location.href = '/thanks-download/';
       })
       .catch(() => {
         submitBtn.disabled = false;
