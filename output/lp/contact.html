@@ -648,6 +648,23 @@
               <div class="inline-error" id="error-inquiry"></div>
             </div>
 
+            <!-- PLEX福利厚生をどこで知りましたか？ -->
+            <div class="input-group">
+              <label for="referralSource">PLEX福利厚生をどこで知りましたか？<span class="required">必須</span></label>
+              <select id="referralSource" name="referralSource" required>
+                <option value="">選択してください</option>
+                <option value="Facebook/Instagram">Facebook/Instagram</option>
+                <option value="WEB検索">WEB検索</option>
+                <option value="LinkedIn">LinkedIn</option>
+                <option value="X（旧Twitter）">X（旧Twitter）</option>
+                <option value="展示会">展示会</option>
+                <option value="イベント">イベント</option>
+                <option value="知人/取引先からの紹介">知人/取引先からの紹介</option>
+                <option value="その他">その他</option>
+              </select>
+              <div class="inline-error" id="error-referralSource"></div>
+            </div>
+
             <!-- プライバシーポリシー同意文言 -->
             <p class="privacy-consent">以下のボタンを押すと、<a href="/privacy/" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>に同意したものとみなされます。</p>
 
@@ -806,6 +823,12 @@
         valid = false;
       }
 
+      // 流入経路
+      if (!form.referralSource.value) {
+        showError('referralSource', '流入経路を選択してください');
+        valid = false;
+      }
+
       return valid;
     }
 
@@ -830,6 +853,7 @@
         department: form.department.value.trim() || '',
         position: form.position.value.trim() || '',
         inquiry: form.inquiry.value.trim(),
+        referralSource: form.referralSource.value || '',
         formType: 'お問い合わせ'
       };
 
