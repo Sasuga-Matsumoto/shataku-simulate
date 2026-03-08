@@ -834,6 +834,17 @@
 
     const GAS_URL = 'https://script.google.com/macros/s/AKfycbz_M32V8aht98xSQAlJ--pNsyLQTbv8JEo1wTZ3Rnz_q8YLK-e3wNtjVUeHXEpBUsi8/exec';
 
+    function getUtmParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        utm_source: params.get('utm_source') || '',
+        utm_medium: params.get('utm_medium') || '',
+        utm_campaign: params.get('utm_campaign') || '',
+        utm_content: params.get('utm_content') || '',
+        utm_term: params.get('utm_term') || ''
+      };
+    }
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
@@ -843,6 +854,7 @@
       submitBtn.disabled = true;
       submitBtn.textContent = '送信中...';
 
+      const utm = getUtmParams();
       const data = {
         company: form.company.value.trim(),
         lastName: form.lastName.value.trim(),
@@ -854,7 +866,12 @@
         position: form.position.value.trim() || '',
         inquiry: form.inquiry.value.trim(),
         referralSource: form.referralSource.value || '',
-        formType: 'お問い合わせ'
+        formType: 'お問い合わせ',
+        utm_source: utm.utm_source,
+        utm_medium: utm.utm_medium,
+        utm_campaign: utm.utm_campaign,
+        utm_content: utm.utm_content,
+        utm_term: utm.utm_term
       };
 
       fetch(GAS_URL, {
