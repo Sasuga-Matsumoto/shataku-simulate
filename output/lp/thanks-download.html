@@ -14,7 +14,7 @@
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
-  <title>資料請求ありがとうございます | PLEX 福利厚生社宅</title>
+  <title>資料をお送りしました | PLEX 福利厚生社宅</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -253,46 +253,12 @@
       .thanks-title { font-size: 1.35rem; }
     }
 
-    .thanks-text {
-      font-size: 0.85rem;
-      color: var(--text-light);
-      line-height: 1.8;
-      margin-bottom: 20px;
-    }
-
     .thanks-divider {
       width: 48px;
       height: 2px;
       background: linear-gradient(90deg, var(--bright-blue), rgba(51,102,255,0.2));
       border-radius: 2px;
       margin: 0 auto 20px;
-    }
-
-    .thanks-next {
-      background: var(--bg);
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-bottom: 20px;
-    }
-    .thanks-next-label {
-      font-family: 'IBM Plex Sans', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--bright-blue);
-      margin-bottom: 6px;
-    }
-    .thanks-next-title {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--dark-blue);
-      margin-bottom: 12px;
-    }
-    .thanks-next-text {
-      font-size: 0.8rem;
-      color: var(--text-light);
-      line-height: 1.6;
     }
 
     .thanks-cta {
@@ -327,17 +293,138 @@
       box-shadow: 0 6px 20px rgba(235,86,0,0.35), 0 2px 4px rgba(0,0,0,0.08);
     }
     .thanks-cta:active { transform: translateY(0); }
-
-    .thanks-back {
-      display: inline-block;
-      margin-top: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-light);
-      text-decoration: none;
-      transition: color 0.2s;
+    .thanks-cta {
+      animation: cta-bounce 2s ease-in-out infinite;
     }
-    .thanks-back:hover { color: var(--bright-blue); }
+    @keyframes cta-bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
+    /* ===== Service message ===== */
+    .thanks-message {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    /* ===== 3 Features ===== */
+    .thanks-features {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    @media (min-width: 640px) {
+      .thanks-features { grid-template-columns: repeat(3, 1fr); }
+    }
+    .thanks-feature-item {
+      background: var(--bg);
+      border-radius: 12px;
+      padding: 16px 12px;
+      text-align: center;
+    }
+    .thanks-feature-number {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--bright-blue);
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+    .thanks-feature-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+      margin-bottom: 4px;
+    }
+    /* ===== Schedule section ===== */
+    .thanks-schedule {
+      margin-bottom: 24px;
+    }
+    .thanks-schedule-text {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+
+    /* ===== Notice section ===== */
+    .thanks-notice {
+      background: var(--bg);
+      border-radius: 12px;
+      padding: 16px 20px;
+      text-align: left;
+    }
+    .thanks-notice-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+    .thanks-notice-item + .thanks-notice-item {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(30,58,138,0.06);
+    }
+    .thanks-notice-icon {
+      flex-shrink: 0;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    /* ===== NEXT STEPS (contact page) ===== */
+    .thanks-steps {
+      margin-bottom: 24px;
+    }
+    .thanks-steps-label {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--bright-blue);
+      margin-bottom: 16px;
+    }
+    .thanks-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      text-align: left;
+    }
+    .thanks-step + .thanks-step {
+      margin-top: 12px;
+    }
+    .thanks-step-num {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      background: var(--bright-blue);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .thanks-step-content {
+      flex: 1;
+    }
+    .thanks-step-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+      margin-bottom: 2px;
+    }
+    .thanks-step-desc {
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
 
     /* ===== Fade-in animation ===== */
     .fade-up {
@@ -454,21 +541,48 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
 
-        <h1 class="thanks-title">資料ご請求ありがとうございます</h1>
+        <h1 class="thanks-title">資料をお送りしました</h1>
 
-        <p class="thanks-text">フォームにご入力いただいたメールアドレス宛にサービス資料をお送りいたします。届かない場合はお手数ですが、迷惑メールフォルダをご確認ください。</p>
+        <p class="thanks-message">PLEX福利厚生社宅は、社会保険料を最適化し、<br>従業員の手取りを<strong>年間15〜33万円アップ</strong>させるサービスです。</p>
+
+        <!-- 日程調整セクション -->
+        <div class="thanks-schedule">
+          <p class="thanks-schedule-text">30分程度のオンライン説明で、サービスの全体像をお伝えします</p>
+          <a href="https://calendar.app.google/engNqwccyxSXtCs66" target="_blank" rel="noopener noreferrer" class="thanks-cta">
+            空き日程を見る
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+        </div>
 
         <div class="thanks-divider"></div>
 
-        <div class="thanks-next-title">オンラインでのご説明も可能です</div>
+        <!-- 3つの特徴 -->
+        <div class="thanks-features">
+          <div class="thanks-feature-item">
+            <div class="thanks-feature-number">0<span style="font-size:0.9rem">円</span></div>
+            <div class="thanks-feature-label">初期費用</div>
+          </div>
+          <div class="thanks-feature-item">
+            <div class="thanks-feature-number">5~10<span style="font-size:0.9rem">分</span></div>
+            <div class="thanks-feature-label">月の運用工数</div>
+          </div>
+          <div class="thanks-feature-item">
+            <div class="thanks-feature-number"><span style="font-size:0.9rem">最短</span>1<span style="font-size:0.9rem">週間</span></div>
+            <div class="thanks-feature-label">導入完了</div>
+          </div>
+        </div>
 
-        <a href="https://calendar.app.google/engNqwccyxSXtCs66" target="_blank" rel="noopener noreferrer" class="thanks-cta">
-          日程調整はこちら
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
-
-        <br>
-        <a href="/" class="thanks-back" target="_blank" rel="noopener">&larr; トップページに戻る</a>
+        <!-- 通知セクション -->
+        <div class="thanks-notice">
+          <div class="thanks-notice-item">
+            <span class="thanks-notice-icon">&#x1F4E9;</span>
+            <span>フォームにご入力いただいたメールアドレス宛にサービス資料をお送りしています。届かない場合はお手数ですが、迷惑メールフォルダをご確認ください。</span>
+          </div>
+          <div class="thanks-notice-item">
+            <span class="thanks-notice-icon">&#x1F4DE;</span>
+            <span>翌営業日に担当者からお電話いたします。サービスについてのご質問もお気軽にどうぞ。</span>
+          </div>
+        </div>
 
       </div>
     </div>
