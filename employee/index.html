@@ -596,14 +596,6 @@
       color: var(--dark-blue);
       box-shadow: 0 2px 6px rgba(0,0,0,0.12);
     }
-    .savings-footnote {
-      margin-top: 16px;
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.75);
-      text-align: center;
-      position: relative;
-      line-height: 1.5;
-    }
     .savings-row { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; position: relative; }
     .savings-divider {
       width: 1px;
@@ -1195,7 +1187,6 @@
               <div class="s-value s-value--5year">+<span id="output-5year">0</span><span class="s-unit">円</span></div>
             </div>
           </div>
-          <p class="savings-footnote" id="savings-footnote"></p>
         </div>
 
         <div class="chart-card">
@@ -1704,15 +1695,10 @@ function runCalculation() {
 function applySummaryView(mode) {
   var callout = document.querySelector('.savings-callout');
   if (!callout || !callout.dataset.net) return;
-  var vals  = JSON.parse(callout.dataset[mode] || callout.dataset.net);
-  var other = JSON.parse(callout.dataset[mode === 'net' ? 'gross' : 'net']);
+  var vals = JSON.parse(callout.dataset[mode] || callout.dataset.net);
   document.getElementById('output-monthly').textContent = formatYen(vals[0]);
   document.getElementById('output-annual').textContent  = formatYen(vals[1]);
   document.getElementById('output-5year').textContent   = formatYen(vals[2]);
-  var msg = (mode === 'net')
-    ? '※ 同じ効果を額面アップで得るには、年 +' + formatYen(other[1]) + '円の昇給に相当します'
-    : '※ 実際の手取り増加額は、年 +' + formatYen(other[1]) + '円 です';
-  document.getElementById('savings-footnote').textContent = msg;
   callout.querySelectorAll('.toggle-btn').forEach(function(b){
     var active = b.dataset.view === mode;
     b.classList.toggle('is-active', active);
