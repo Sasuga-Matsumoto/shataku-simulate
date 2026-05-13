@@ -456,6 +456,128 @@
       box-shadow: var(--shadow-md);
       border: 1px solid rgba(30,58,138,0.07);
     }
+
+    /* Step indicator */
+    .step-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .step-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 12px 6px 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-light);
+      background: #F1F5FB;
+      border-radius: 999px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .step-pill .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px; height: 20px;
+      background: #CBD5E1;
+      color: white;
+      border-radius: 50%;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.7rem;
+    }
+    .step-pill.is-active {
+      color: white;
+      background: var(--dark-blue);
+    }
+    .step-pill.is-active .step-num {
+      background: rgba(255,255,255,0.3);
+    }
+    .step-pill.is-done .step-num {
+      background: var(--bright-blue);
+    }
+    .step-connector {
+      flex: 1;
+      height: 2px;
+      background: #E5EAF3;
+      max-width: 40px;
+    }
+
+    /* Step container */
+    .sim-step { display: none; }
+    .sim-step.is-active { display: block; }
+    .step-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+      margin-bottom: 4px;
+    }
+    .step-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    /* Optional / required badge */
+    .optional-badge {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: var(--text-light);
+      background: #E5EAF3;
+      padding: 2px 7px;
+      border-radius: 4px;
+      margin-right: 8px;
+      letter-spacing: 0.06em;
+      vertical-align: middle;
+      line-height: 1.4;
+      transform: translateY(-1px);
+    }
+
+    /* Breakdown section header */
+    .breakdown-header {
+      display: flex;
+      align-items: center;
+      margin: 22px 0 12px;
+      padding-top: 18px;
+      border-top: 1px solid #E5EAF3;
+      font-size: 0.95rem;
+      color: var(--dark-blue);
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    /* Step navigation */
+    .step-nav {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .step-nav .step-back-btn {
+      flex: 0 0 auto;
+      min-width: 100px;
+      padding: 15px 18px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: inherit;
+      background: white;
+      color: var(--dark-blue);
+      border: 1.5px solid #CBD5E1;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: border-color 0.18s, background 0.18s;
+    }
+    .step-nav .step-back-btn:hover {
+      border-color: var(--dark-blue);
+      background: #F1F5FB;
+    }
+    .step-nav .calc-btn,
+    .step-nav .step-next-btn {
+      flex: 1;
+      margin-top: 0;
+    }
     .input-group { margin-bottom: 16px; }
     .input-group label {
       display: block;
@@ -503,6 +625,200 @@
       padding-right: 38px;
     }
     .error-msg { color: #d32f2f; font-size: 0.85rem; min-height: 1.2em; margin-top: 4px; }
+    .error-msg:not(:empty) {
+      background: #FEF2F2;
+      border: 1px solid #FBD0D0;
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-top: 8px;
+      line-height: 1.55;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .error-msg:not(:empty)::before {
+      content: '⚠';
+      font-size: 1rem;
+      line-height: 1.2;
+      flex-shrink: 0;
+    }
+
+    /* Required-field badge & error highlight */
+    .required-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #fff;
+      background: #d32f2f;
+      padding: 2px 7px;
+      border-radius: 4px;
+      margin-right: 8px;
+      letter-spacing: 0.06em;
+      vertical-align: middle;
+      line-height: 1.4;
+      transform: translateY(-1px);
+    }
+    .input-group input.input-error,
+    .input-group select.input-error {
+      border-color: #d32f2f;
+      background: #FFF7F7;
+    }
+    .input-group input.input-error:focus,
+    .input-group select.input-error:focus {
+      border-color: #d32f2f;
+      box-shadow: 0 0 0 3px rgba(211,47,47,0.15);
+    }
+    .input-group.has-error label {
+      color: #d32f2f;
+    }
+
+    /* Detail toggle (more accurate input) */
+    .detail-toggle-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 16px;
+      margin-top: 4px;
+      margin-bottom: 12px;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--dark-blue);
+      background: #F1F5FB;
+      border: 1.5px dashed rgba(30,58,138,0.25);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .detail-toggle-btn:hover {
+      background: #E8EEF8;
+      border-color: rgba(30,58,138,0.5);
+    }
+    .detail-toggle-btn .detail-arrow {
+      font-size: 0.7rem;
+      transition: transform 0.25s ease;
+      color: var(--bright-blue);
+    }
+    .detail-toggle-btn[aria-expanded="true"] .detail-arrow {
+      transform: rotate(180deg);
+    }
+    .detail-toggle-btn .detail-tagline {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--text-light);
+      margin-left: auto;
+      margin-right: 6px;
+    }
+
+    .detail-section {
+      display: none;
+      border-left: 3px solid #DDE6F5;
+      padding: 4px 0 4px 14px;
+      margin-bottom: 12px;
+    }
+    .detail-section.is-open { display: block; }
+    .detail-section .input-group label { font-size: 0.82rem; }
+    .detail-hint {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      margin-top: -2px;
+      margin-bottom: 8px;
+      line-height: 1.55;
+    }
+
+    /* Working-hours checkbox cluster */
+    .wh-card {
+      background: #F8FAFE;
+      border: 1px solid rgba(30,58,138,0.10);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .wh-mode {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .wh-mode-btn {
+      flex: 1;
+      padding: 7px 10px;
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-light);
+      background: white;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .wh-mode-btn.is-active {
+      color: var(--dark-blue);
+      border-color: var(--bright-blue);
+      background: #EFF4FF;
+    }
+    .wh-checks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 12px;
+    }
+    .wh-check {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 0;
+      font-size: 0.82rem;
+      color: var(--text);
+      cursor: pointer;
+      user-select: none;
+    }
+    .wh-check input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--bright-blue);
+      cursor: pointer;
+      margin: 0;
+      flex-shrink: 0;
+    }
+    .wh-check-label-sub {
+      display: block;
+      font-size: 0.66rem;
+      color: var(--text-light);
+      margin-top: 1px;
+      line-height: 1.3;
+    }
+    .wh-custom {
+      display: none;
+      margin-top: 6px;
+    }
+    .wh-custom.is-open { display: block; }
+    .wh-result {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(30,58,138,0.18);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .wh-result-label {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      font-weight: 600;
+    }
+    .wh-result-value {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+    }
+    .wh-result-value strong {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 1.1rem;
+      color: var(--bright-blue);
+      margin: 0 2px;
+    }
+
     .calc-btn {
       display: block;
       width: 100%;
@@ -619,6 +935,73 @@
       margin: 12px 0 8px;
     }
     .s-value--5year { font-size: 2.2rem; }
+
+    /* Applied ratio & minimum-wage status */
+    .applied-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 12px 0;
+    }
+    .applied-info > div {
+      background: var(--card-bg);
+      border: 1px solid rgba(30,58,138,0.10);
+      border-radius: 12px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .applied-info-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-light);
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+    .applied-info-value {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+      letter-spacing: -0.01em;
+    }
+    .applied-info-value .unit {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-light);
+      margin-left: 2px;
+    }
+    .applied-info-sub {
+      font-size: 0.7rem;
+      color: var(--text-light);
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+    .applied-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    .applied-status.is-ok {
+      background: #E6F4EA;
+      color: #1E7B3A;
+    }
+    .applied-status.is-warn {
+      background: #FEF3E2;
+      color: #B25E00;
+    }
+    .applied-status.is-ng {
+      background: #FCE8E6;
+      color: #B12C20;
+    }
+    @media (max-width: 600px) {
+      .applied-info { grid-template-columns: 1fr; }
+    }
 
     /* Bar chart - 3-column waterfall */
     .chart-card {
@@ -1138,28 +1521,135 @@
         </div>
 
         <div class="sim-input-card">
-          <div class="input-group">
-            <label for="salary">月収（額面の金額）</label>
-            <div class="input-with-unit">
-              <input type="number" id="salary" name="salary" autocomplete="off" inputmode="numeric" placeholder="300000" step="10000" min="0" value="300000">
-              <span class="input-unit">円</span>
+          <!-- Step indicator -->
+          <div class="step-indicator">
+            <span class="step-pill is-active" data-step-pill="1">
+              <span class="step-num">1</span>月収
+            </span>
+            <span class="step-connector"></span>
+            <span class="step-pill" data-step-pill="2">
+              <span class="step-num">2</span>賃料・勤務地
+            </span>
+          </div>
+
+          <!-- Step 1: 月収 -->
+          <div class="sim-step is-active" data-step="1">
+            <div class="step-title">月収の詳細を入力しましょう</div>
+            <div class="step-subtitle">手取りシミュレーションのベースとなる月収を入力してください。</div>
+
+            <div class="input-group" data-required="salary">
+              <label for="salary"><span class="required-badge">必須</span>月収（額面の金額）</label>
+              <div class="input-with-unit">
+                <input type="number" id="salary" name="salary" autocomplete="off" inputmode="numeric" placeholder="300000" step="10000" min="0" value="300000">
+                <span class="input-unit">円</span>
+              </div>
+            </div>
+
+            <div class="breakdown-header"><span class="optional-badge">任意</span>月収の内訳</div>
+
+            <div class="input-group">
+              <label for="base-salary">基本給</label>
+              <div class="input-with-unit">
+                <input type="number" id="base-salary" autocomplete="off" inputmode="numeric" placeholder="例: 220000" step="1000" min="0">
+                <span class="input-unit">円</span>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="overtime-pay">残業代（固定残業代等）</label>
+              <div class="input-with-unit">
+                <input type="number" id="overtime-pay" autocomplete="off" inputmode="numeric" placeholder="例: 40000" step="1000" min="0">
+                <span class="input-unit">円</span>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="other-allowance">各種手当（通勤・家族・精皆勤を除く）</label>
+              <div class="input-with-unit">
+                <input type="number" id="other-allowance" autocomplete="off" inputmode="numeric" placeholder="例: 40000" step="1000" min="0">
+                <span class="input-unit">円</span>
+              </div>
+            </div>
+
+            <div class="error-msg" id="step1-error-msg"></div>
+
+            <div class="step-nav">
+              <button type="button" id="step1-next-btn" class="calc-btn step-next-btn">次へ →</button>
             </div>
           </div>
-          <div class="input-group">
-            <label for="rent">賃料（共益費・管理費を含む）</label>
-            <div class="input-with-unit">
-              <input type="number" id="rent" name="rent" autocomplete="off" inputmode="numeric" placeholder="80000" step="1000" min="0" value="80000">
-              <span class="input-unit">円</span>
+
+          <!-- Step 2: 賃料・勤務地・月所定 -->
+          <div class="sim-step" data-step="2">
+            <div class="step-title">賃料・勤務地を入力しましょう</div>
+            <div class="step-subtitle">お住まいの情報を入力すると、最終的なシミュレーションを実行します。</div>
+
+            <div class="input-group" data-required="rent">
+              <label for="rent"><span class="required-badge">必須</span>賃料（共益費・管理費を含む）</label>
+              <div class="input-with-unit">
+                <input type="number" id="rent" name="rent" autocomplete="off" inputmode="numeric" placeholder="80000" step="1000" min="0" value="80000">
+                <span class="input-unit">円</span>
+              </div>
+            </div>
+
+            <div class="input-group" data-required="prefecture">
+              <label for="prefecture"><span class="required-badge">必須</span>勤務地の都道府県</label>
+              <select id="prefecture" name="prefecture" autocomplete="off">
+                <option value="">選択してください</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label><span class="optional-badge">任意</span>月所定労働時間</label>
+              <div class="wh-card">
+                <div class="wh-mode" role="tablist" aria-label="所定労働時間の入力方法">
+                  <button type="button" class="wh-mode-btn is-active" data-mode="checkbox" role="tab" aria-selected="true">休日パターンから選ぶ</button>
+                  <button type="button" class="wh-mode-btn" data-mode="custom" role="tab" aria-selected="false">時間を直接入力</button>
+                </div>
+
+                <div class="wh-checkbox-wrap">
+                  <div class="wh-checks">
+                    <label class="wh-check">
+                      <input type="checkbox" id="wh-weekend" checked>
+                      <span>土日<span class="wh-check-label-sub">毎週土曜・日曜</span></span>
+                    </label>
+                    <label class="wh-check">
+                      <input type="checkbox" id="wh-publichols" checked>
+                      <span>祝日<span class="wh-check-label-sub">国民の祝日・振替休日</span></span>
+                    </label>
+                    <label class="wh-check">
+                      <input type="checkbox" id="wh-yearend">
+                      <span>年末年始<span class="wh-check-label-sub">12/29 - 1/3</span></span>
+                    </label>
+                    <label class="wh-check">
+                      <input type="checkbox" id="wh-summer">
+                      <span>夏季休暇<span class="wh-check-label-sub">8/13 - 8/16</span></span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="wh-custom" id="wh-custom-wrap">
+                  <div class="input-with-unit">
+                    <input type="number" id="wh-custom-hours" autocomplete="off" inputmode="numeric" placeholder="例: 163" step="1" min="80" max="240" value="163">
+                    <span class="input-unit">時間/月</span>
+                  </div>
+                </div>
+
+                <div class="wh-result">
+                  <span class="wh-result-label">2026年カレンダーで計算</span>
+                  <span class="wh-result-value">
+                    年間休日 <strong id="wh-annual-days">121</strong>日 / 月所定 <strong id="wh-monthly-hours">163</strong>時間
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="error-msg" id="error-msg"></div>
+
+            <div class="step-nav">
+              <button type="button" id="step-back-btn" class="step-back-btn">← 戻る</button>
+              <button id="calc-btn" class="calc-btn">シミュレーション実行</button>
             </div>
           </div>
-          <div class="input-group">
-            <label for="prefecture">勤務地の都道府県</label>
-            <select id="prefecture" name="prefecture" autocomplete="off">
-              <option value="">選択してください</option>
-            </select>
-          </div>
-          <div class="error-msg" id="error-msg"></div>
-          <button id="calc-btn" class="calc-btn">シミュレーション実行</button>
         </div>
       </div>
 
@@ -1186,6 +1676,22 @@
               <div class="s-label">5年間</div>
               <div class="s-value s-value--5year">+<span id="output-5year">0</span><span class="s-unit">円</span></div>
             </div>
+          </div>
+        </div>
+
+        <!-- 適用%・最賃判定（詳細内訳入力時のみ表示） -->
+        <div class="applied-info" id="applied-info" style="display:none;">
+          <div>
+            <div class="applied-info-label">適用された減額割合</div>
+            <div class="applied-info-value"><span id="applied-ratio">80</span><span class="unit">%</span></div>
+            <div class="applied-info-sub">家賃に対する社会保険・税の算定基礎からの控除割合</div>
+          </div>
+          <div>
+            <div class="applied-info-label">最低賃金判定</div>
+            <div class="applied-info-value">
+              <span class="applied-status is-ok" id="min-wage-status">クリア</span>
+            </div>
+            <div class="applied-info-sub" id="min-wage-detail">最賃ラインまで残り —</div>
           </div>
         </div>
 
@@ -1383,6 +1889,24 @@ mobileMenu.querySelectorAll('a').forEach(function(link) {
   });
 });
 
+// ===== 都道府県別 最低賃金（時給円・令和7年10月発効） =====
+var MIN_WAGE_RATES = {
+  '北海道': 1075, '青森県': 1029, '岩手県': 1031, '宮城県': 1038, '秋田県': 1031,
+  '山形県': 1032, '福島県': 1033, '茨城県': 1074, '栃木県': 1068, '群馬県': 1063,
+  '埼玉県': 1141, '千葉県': 1140, '東京都': 1226, '神奈川県': 1225, '新潟県': 1050,
+  '富山県': 1062, '石川県': 1054, '福井県': 1053, '山梨県': 1052, '長野県': 1061,
+  '岐阜県': 1065, '静岡県': 1097, '愛知県': 1140, '三重県': 1087, '滋賀県': 1080,
+  '京都府': 1122, '大阪府': 1177, '兵庫県': 1116, '奈良県': 1051, '和歌山県': 1045,
+  '鳥取県': 1030, '島根県': 1033, '岡山県': 1047, '広島県': 1085, '山口県': 1043,
+  '徳島県': 1046, '香川県': 1046, '愛媛県': 1033, '高知県': 1023,
+  '福岡県': 1057, '佐賀県': 1030, '長崎県': 1031,
+  '熊本県': 1034, '大分県': 1035, '宮崎県': 1023,
+  '鹿児島県': 1026, '沖縄県': 1023
+};
+
+// 減額割合の上限（家賃に対する最大比率）
+var MAX_REDUCTION_RATIO = 0.8;
+
 // ===== 都道府県別健康保険料率（令和8年度 協会けんぽ） =====
 var PREFECTURE_RATES = {
   '北海道': 0.1028, '青森県': 0.0985, '岩手県': 0.0951,
@@ -1518,10 +2042,11 @@ function calcScenario(monthlySalary, rent, reductionRatio, healthRate) {
     realNetMonthly: realNetAnnual / 12
   };
 }
-function calculate(monthlySalary, rent, prefecture) {
+function calculate(monthlySalary, rent, prefecture, reductionRatio) {
+  if (typeof reductionRatio !== 'number') reductionRatio = MAX_REDUCTION_RATIO;
   var healthRate = PREFECTURE_RATES[prefecture];
   var without   = calcScenario(monthlySalary, rent, 0.0, healthRate);
-  var withSystem = calcScenario(monthlySalary, rent, 0.8, healthRate);
+  var withSystem = calcScenario(monthlySalary, rent, reductionRatio, healthRate);
 
   var DELTA = 30000;
   var withoutPlus = calcScenario(monthlySalary + DELTA, rent, 0.0, healthRate);
@@ -1533,6 +2058,7 @@ function calculate(monthlySalary, rent, prefecture) {
   return {
     without: without,
     withSystem: withSystem,
+    reductionRatio: reductionRatio,
     monthlyIncrease: monthlyIncrease,
     annualIncrease:  monthlyIncrease * 12,
     fiveYearIncrease: monthlyIncrease * 12 * 5,
@@ -1544,6 +2070,123 @@ function calculate(monthlySalary, rent, prefecture) {
 function formatYen(n) { return Math.round(n).toLocaleString('ja-JP'); }
 function formatMan(n) { return (Math.round(n / 10000 * 10) / 10).toFixed(1); }
 
+// ===== 2026年カレンダー（祝日・振替休日） =====
+var HOLIDAYS_2026 = [
+  '2026-01-01', // 元日
+  '2026-01-12', // 成人の日
+  '2026-02-11', // 建国記念の日
+  '2026-02-23', // 天皇誕生日
+  '2026-03-20', // 春分の日
+  '2026-04-29', // 昭和の日
+  '2026-05-03', // 憲法記念日（日曜）
+  '2026-05-04', // みどりの日
+  '2026-05-05', // こどもの日
+  '2026-05-06', // 振替休日
+  '2026-07-20', // 海の日
+  '2026-08-11', // 山の日
+  '2026-09-21', // 敬老の日
+  '2026-09-22', // 国民の休日
+  '2026-09-23', // 秋分の日
+  '2026-10-12', // スポーツの日
+  '2026-11-03', // 文化の日
+  '2026-11-23'  // 勤労感謝の日
+];
+var YEAR_END_2026 = ['2026-12-29','2026-12-30','2026-12-31','2026-01-01','2026-01-02','2026-01-03'];
+var SUMMER_2026   = ['2026-08-13','2026-08-14','2026-08-15','2026-08-16'];
+
+function fmtDate(d) {
+  var m = String(d.getMonth() + 1).padStart(2, '0');
+  var day = String(d.getDate()).padStart(2, '0');
+  return '2026-' + m + '-' + day;
+}
+
+// 土日と祝日の重複は自動排除（Setでユニーク化）
+function countAnnualHolidays(opts) {
+  var holidaySet = new Set();
+  var start = new Date(2026, 0, 1);
+  var end   = new Date(2026, 11, 31);
+  for (var d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+    var dateStr = fmtDate(d);
+    var dow = d.getDay(); // 0=Sun, 6=Sat
+    if (opts.weekend    && (dow === 0 || dow === 6))        holidaySet.add(dateStr);
+    if (opts.publicHols && HOLIDAYS_2026.indexOf(dateStr) > -1) holidaySet.add(dateStr);
+    if (opts.yearEnd    && YEAR_END_2026.indexOf(dateStr) > -1) holidaySet.add(dateStr);
+    if (opts.summer     && SUMMER_2026.indexOf(dateStr) > -1)   holidaySet.add(dateStr);
+  }
+  return holidaySet.size;
+}
+
+function calcMonthlyHoursFromCheckboxes() {
+  var opts = {
+    weekend:    document.getElementById('wh-weekend').checked,
+    publicHols: document.getElementById('wh-publichols').checked,
+    yearEnd:    document.getElementById('wh-yearend').checked,
+    summer:     document.getElementById('wh-summer').checked
+  };
+  var annualDays = countAnnualHolidays(opts);
+  // 内部計算用は小数保持、表示時のみ四捨五入
+  var monthlyHoursExact = (365 - annualDays) * 8 / 12;
+  return { annualDays: annualDays, monthlyHoursExact: monthlyHoursExact };
+}
+
+function updateWorkingHoursDisplay() {
+  var r = calcMonthlyHoursFromCheckboxes();
+  document.getElementById('wh-annual-days').textContent = r.annualDays;
+  document.getElementById('wh-monthly-hours').textContent = Math.round(r.monthlyHoursExact);
+}
+
+// 現在の所定労働時間（モードに応じて返す。内部計算用は小数値）
+function getCurrentMonthlyHours() {
+  var mode = document.querySelector('.wh-mode-btn.is-active').dataset.mode;
+  if (mode === 'custom') {
+    return parseFloat(document.getElementById('wh-custom-hours').value) || 163;
+  }
+  return calcMonthlyHoursFromCheckboxes().monthlyHoursExact;
+}
+
+// ===== 最大減額割合（最賃を下回らないギリギリの%）の計算 =====
+function computeMaxReductionRatio(salary, baseSalary, otherAllowance, monthlyHours, rent, prefecture) {
+  var minWageHourly = MIN_WAGE_RATES[prefecture] || 0;
+
+  // 最賃算入対象賃金
+  //   詳細未入力時: 月収全額を基本給とみなす
+  //   詳細入力時 : 基本給 + 各種手当（残業代は最賃算入から除外）
+  var hasDetail = baseSalary > 0 || otherAllowance > 0;
+  var minWageBase = hasDetail ? (baseSalary + otherAllowance) : salary;
+
+  // 最賃必要月給
+  var requiredMonthly = minWageHourly * monthlyHours;
+
+  // 減額可能上限（マイナスは0）
+  var reductionMax = Math.max(0, minWageBase - requiredMonthly);
+
+  // 賃料に対する%（上限 MAX_REDUCTION_RATIO）
+  var ratioByMinWage = rent > 0 ? reductionMax / rent : 0;
+  var ratio = Math.min(MAX_REDUCTION_RATIO, ratioByMinWage);
+
+  // ステータス
+  var status;
+  if (reductionMax <= 0) {
+    status = 'ng';      // 最賃ライン到達不可（制度利用不可）
+  } else if (ratioByMinWage >= MAX_REDUCTION_RATIO) {
+    status = 'capped';  // 80%上限到達（余裕大）
+  } else {
+    status = 'ok';      // 通常クリア
+  }
+
+  return {
+    ratio: ratio,
+    minWageHourly: minWageHourly,
+    monthlyHours: monthlyHours,
+    minWageBase: minWageBase,
+    requiredMonthly: requiredMonthly,
+    reductionMax: reductionMax,
+    surplus: minWageBase - requiredMonthly,
+    status: status,
+    hasDetail: hasDetail
+  };
+}
+
 // Bar chart rendering — 3-column waterfall for each scenario
 // グラフの高さ・割合は月収30万円・家賃8万円・東京都で完全固定、表示値のみ実際の計算値を使用
 function renderBars(result, rent, monthlySalary) {
@@ -1551,8 +2194,11 @@ function renderBars(result, rent, monthlySalary) {
   var s = result.withSystem;
 
   // 実際の値（表示用）
-  var genbutsu = rent * 0.8;
-  var tenbiki  = rent * 0.2;
+  var ratio = (typeof result.reductionRatio === 'number') ? result.reductionRatio : 0.8;
+  var genbutsu = rent * ratio;
+  var tenbiki  = rent * (1 - ratio);
+  var genbutsuPct = Math.round(ratio * 1000) / 10; // 小数1桁
+  var tenbikiPct = Math.round((1 - ratio) * 1000) / 10;
   var cashSalary = monthlySalary - genbutsu;
   var taxW = Math.round(w.totalDeductions / 12);
   var netW = Math.round(w.netMonthly);
@@ -1599,7 +2245,7 @@ function renderBars(result, rent, monthlySalary) {
   // === 制度利用時（逆順: 実質手取り←税引き後手取り←月収） ===
   document.getElementById('chart-system').innerHTML = buildBarGroup([
     { label: '実質手取り', height: H_NET_S, segments: [
-      { cls: 'seg-tenbiki', label: '家賃の20%', value: formatMan(tenbiki), flex: TENBIKI_FIXED },
+      { cls: 'seg-tenbiki', label: '家賃の' + tenbikiPct + '%', value: formatMan(tenbiki), flex: TENBIKI_FIXED },
       { cls: 'seg-real seg-real--highlight', label: '実質手取り', value: formatMan(realS), flex: realS_flexH }
     ]},
     { label: '税引き後手取り', height: H_CASH, segments: [
@@ -1607,7 +2253,7 @@ function renderBars(result, rent, monthlySalary) {
       { cls: 'seg-net', label: '税引き後<br>手取り', value: formatMan(netS), flex: F_NET_S }
     ]},
     { label: '月収', height: H_SALARY, segments: [
-      { cls: 'seg-genbutsu', label: '家賃の80%', value: formatMan(genbutsu), flex: F_GENBUTSU },
+      { cls: 'seg-genbutsu', label: '家賃の' + genbutsuPct + '%', value: formatMan(genbutsu), flex: F_GENBUTSU },
       { cls: 'seg-cash', label: '月収<br>(現金支給)', value: formatMan(cashSalary), flex: F_CASH }
     ]}
   ], true);
@@ -1637,12 +2283,14 @@ function buildBarGroup(bars, reverse) {
 // Detail table rendering
 function renderDetailTable(result, rent, monthlySalary) {
   var w = result.without, s = result.withSystem;
+  var ratio = (typeof result.reductionRatio === 'number') ? result.reductionRatio : 0.8;
+  var tenantRent = Math.round(rent * (1 - ratio));
   var rows = [
     ['月収（額面）',   formatYen(monthlySalary),                     formatYen(Math.round(s.effectiveMonthly))],
     ['社会保険料',     formatYen(Math.round(w.totalSI / 12)),         formatYen(Math.round(s.totalSI / 12))],
     ['住民税',         formatYen(Math.round(w.residentTax / 12)),     formatYen(Math.round(s.residentTax / 12))],
     ['所得税',         formatYen(Math.round(w.incomeTax / 12)),       formatYen(Math.round(s.incomeTax / 12))],
-    ['家賃',           formatYen(rent),                               formatYen(Math.round(rent * 0.2))],
+    ['家賃',           formatYen(rent),                               formatYen(tenantRent)],
     ['実質手取り月額', formatYen(Math.round(w.realNetMonthly)),        formatYen(Math.round(s.realNetMonthly))]
   ];
   var html = '<table><thead><tr><th></th><th>今の賃貸</th><th>福利厚生社宅</th></tr></thead><tbody>';
@@ -1659,26 +2307,115 @@ function renderDetailTable(result, rent, monthlySalary) {
   document.getElementById('detail-table').innerHTML = html;
 }
 
+// 詳細内訳が何か入力されているかを判定（値 > 0）
+function hasDetailInput() {
+  var base = parseInt(document.getElementById('base-salary').value) || 0;
+  var ot   = parseInt(document.getElementById('overtime-pay').value) || 0;
+  var oth  = parseInt(document.getElementById('other-allowance').value) || 0;
+  return base > 0 || ot > 0 || oth > 0;
+}
+
+// 詳細内訳のバリデーション
+//  - 0と空白は同一視
+//  - 1つ以上が0より大きい場合、合計 = 月収 でなければエラー
+function validateDetailBreakdown(salary) {
+  var base = parseInt(document.getElementById('base-salary').value) || 0;
+  var ot   = parseInt(document.getElementById('overtime-pay').value) || 0;
+  var oth  = parseInt(document.getElementById('other-allowance').value) || 0;
+  var sum  = base + ot + oth;
+  var hasAny = base > 0 || ot > 0 || oth > 0;
+
+  if (hasAny && sum !== salary) {
+    return '基本給・残業代・各種手当の合計（' + formatYen(sum) + '円）が月収（' + formatYen(salary) + '円）と一致しません';
+  }
+  return null;
+}
+
+// エラー状態のクリア（Step 2 のみ）
+function clearErrorStates() {
+  document.getElementById('error-msg').textContent = '';
+  document.querySelectorAll('.input-group[data-required="rent"], .input-group[data-required="prefecture"]').forEach(function(g) {
+    g.classList.remove('has-error');
+    var el = g.querySelector('input, select');
+    if (el) el.classList.remove('input-error');
+  });
+}
+
+// Step 2 の必須項目バリデーション
+function validateRequiredStep2(rent, pref) {
+  var missing = [];
+  if (!rent || rent <= 0) {
+    var g2 = document.querySelector('.input-group[data-required="rent"]');
+    g2.classList.add('has-error');
+    g2.querySelector('input').classList.add('input-error');
+    missing.push('賃料');
+  }
+  if (!pref) {
+    var g3 = document.querySelector('.input-group[data-required="prefecture"]');
+    g3.classList.add('has-error');
+    g3.querySelector('select').classList.add('input-error');
+    missing.push('勤務地の都道府県');
+  }
+  return missing;
+}
+
 function runCalculation() {
   var salary = parseInt(document.getElementById('salary').value) || 0;
   var rent   = parseInt(document.getElementById('rent').value)   || 0;
   var pref   = document.getElementById('prefecture').value;
-  document.getElementById('error-msg').textContent = '';
-  if (salary <= 0 || rent <= 0 || !pref) {
+  var errorMsg = document.getElementById('error-msg');
+
+  clearErrorStates();
+
+  // 防衛: 月収が無効ならStep 1に戻す（通常は起こらない）
+  if (salary <= 0) {
+    document.getElementById('step1-error-msg').textContent = '月収 を入力してください';
+    document.querySelectorAll('.sim-step').forEach(function(s) {
+      s.classList.toggle('is-active', s.dataset.step === '1');
+    });
+    document.querySelectorAll('.step-pill').forEach(function(p) {
+      p.classList.toggle('is-active', p.dataset.stepPill === '1');
+      p.classList.remove('is-done');
+    });
+    return;
+  }
+
+  // Step 2 の必須項目チェック
+  var missing = validateRequiredStep2(rent, pref);
+  if (missing.length > 0) {
+    errorMsg.textContent = missing.join('、') + ' を入力してください';
     document.getElementById('sim-results').style.display = 'none';
     return;
   }
+
   if (rent >= salary) {
-    document.getElementById('error-msg').textContent = '賃料は月額支給額未満にしてください。';
+    errorMsg.textContent = '賃料は月額支給額未満にしてください。';
     document.getElementById('sim-results').style.display = 'none';
     return;
   }
-  if (rent * 0.8 >= salary) {
-    document.getElementById('error-msg').textContent = '賃料が高すぎます。月額支給額の80%以上の家賃には対応していません。';
+
+  // 詳細内訳のバリデーション（防衛: 通常Step 1で検出済み）
+  var detailErrorMsg = validateDetailBreakdown(salary);
+  if (detailErrorMsg) {
+    errorMsg.textContent = detailErrorMsg;
     document.getElementById('sim-results').style.display = 'none';
     return;
   }
-  var result = calculate(salary, rent, pref);
+
+  // === 最大減額割合（最賃ベース）を動的計算 ===
+  var baseSalary     = parseInt(document.getElementById('base-salary').value)     || 0;
+  var otherAllowance = parseInt(document.getElementById('other-allowance').value) || 0;
+  var monthlyHours   = getCurrentMonthlyHours();
+  var ratioInfo = computeMaxReductionRatio(salary, baseSalary, otherAllowance, monthlyHours, rent, pref);
+
+  // 制度利用不可ケース: 最賃ライン未到達 or 賃料0
+  if (ratioInfo.status === 'ng') {
+    errorMsg.textContent = '最低賃金ラインを下回るため、現状の月収では制度利用による手取り増加は見込めません。';
+    document.getElementById('sim-results').style.display = 'none';
+    return;
+  }
+
+  var result = calculate(salary, rent, pref, ratioInfo.ratio);
 
   var callout = document.querySelector('.savings-callout');
   callout.dataset.net   = JSON.stringify([result.monthlyIncrease, result.annualIncrease, result.fiveYearIncrease]);
@@ -1688,8 +2425,35 @@ function runCalculation() {
 
   renderBars(result, rent, salary);
   renderDetailTable(result, rent, salary);
+  renderAppliedInfo(ratioInfo);
+
   document.getElementById('sim-results').style.display = 'block';
   document.getElementById('sim-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// 適用%・最賃判定の表示
+function renderAppliedInfo(info) {
+  var appliedInfo = document.getElementById('applied-info');
+  var ratioEl = document.getElementById('applied-ratio');
+  var statusEl = document.getElementById('min-wage-status');
+  var detailEl = document.getElementById('min-wage-detail');
+
+  appliedInfo.style.display = 'grid';
+  ratioEl.textContent = (info.ratio * 100).toFixed(1);
+
+  if (info.status === 'capped') {
+    statusEl.className = 'applied-status is-ok';
+    statusEl.textContent = '上限到達';
+    detailEl.textContent = '最賃ラインまで余裕 ' + formatYen(Math.round(info.surplus)) + '円（上限' + (MAX_REDUCTION_RATIO * 100) + '%適用）';
+  } else if (info.status === 'ok') {
+    statusEl.className = 'applied-status is-ok';
+    statusEl.textContent = 'クリア';
+    detailEl.textContent = '最賃ライン（' + formatYen(Math.round(info.requiredMonthly)) + '円/月）まで余裕 ' + formatYen(Math.round(info.surplus)) + '円';
+  } else {
+    statusEl.className = 'applied-status is-ng';
+    statusEl.textContent = '制度利用不可';
+    detailEl.textContent = '最賃必要月給（' + formatYen(Math.round(info.requiredMonthly)) + '円）に到達していません';
+  }
 }
 
 function applySummaryView(mode) {
@@ -1745,6 +2509,121 @@ document.addEventListener('DOMContentLoaded', function() {
     select.appendChild(group);
   });
   document.getElementById('calc-btn').addEventListener('click', runCalculation);
+
+  // ===== ステップ遷移 =====
+  function scrollToFormTop() {
+    var formEl = document.querySelector('.sim-input-card');
+    if (!formEl) return;
+    var headerEl = document.querySelector('.header');
+    var headerH = headerEl ? headerEl.offsetHeight : 70;
+    var breathingRoom = 24;
+    var rect = formEl.getBoundingClientRect();
+    var currentY = window.pageYOffset || document.documentElement.scrollTop;
+    var targetY = currentY + rect.top - headerH - breathingRoom;
+    // 既にフォームが見える位置にある場合はスクロールしない
+    if (rect.top >= headerH && rect.top <= window.innerHeight * 0.4) return;
+    window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+  }
+
+  function goToStep(n) {
+    document.querySelectorAll('.sim-step').forEach(function(s) {
+      s.classList.toggle('is-active', s.dataset.step === String(n));
+    });
+    document.querySelectorAll('.step-pill').forEach(function(p) {
+      var num = parseInt(p.dataset.stepPill);
+      p.classList.toggle('is-active', num === n);
+      p.classList.toggle('is-done', num < n);
+    });
+    scrollToFormTop();
+  }
+
+  document.getElementById('step1-next-btn').addEventListener('click', function() {
+    var step1Error = document.getElementById('step1-error-msg');
+    step1Error.textContent = '';
+
+    // Step 1 バリデーション
+    var salary = parseInt(document.getElementById('salary').value) || 0;
+    var salaryGroup = document.querySelector('.input-group[data-required="salary"]');
+    var salaryInput = document.getElementById('salary');
+    salaryGroup.classList.remove('has-error');
+    salaryInput.classList.remove('input-error');
+
+    if (salary <= 0) {
+      salaryGroup.classList.add('has-error');
+      salaryInput.classList.add('input-error');
+      step1Error.textContent = '月収 を入力してください';
+      return;
+    }
+    var detailError = validateDetailBreakdown(salary);
+    if (detailError) {
+      step1Error.textContent = detailError;
+      return;
+    }
+    goToStep(2);
+  });
+
+  document.getElementById('step-back-btn').addEventListener('click', function() {
+    goToStep(1);
+  });
+
+  // ===== 月所定労働時間: モード切替 =====
+  var whCheckWrap   = document.querySelector('.wh-checkbox-wrap');
+  var whCustomWrap  = document.getElementById('wh-custom-wrap');
+  var whResultWrap  = document.querySelector('.wh-result');
+  document.querySelectorAll('.wh-mode-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.wh-mode-btn').forEach(function(b) {
+        b.classList.remove('is-active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-selected', 'true');
+      var mode = btn.dataset.mode;
+      if (mode === 'custom') {
+        whCheckWrap.style.display = 'none';
+        whCustomWrap.classList.add('is-open');
+        whResultWrap.style.display = 'none';
+      } else {
+        whCheckWrap.style.display = '';
+        whCustomWrap.classList.remove('is-open');
+        whResultWrap.style.display = '';
+      }
+    });
+  });
+
+  // ===== チェックボックス連動: 年間休日・月所定の自動更新 =====
+  ['wh-weekend','wh-publichols','wh-yearend','wh-summer'].forEach(function(id) {
+    document.getElementById(id).addEventListener('change', updateWorkingHoursDisplay);
+  });
+  updateWorkingHoursDisplay();
+
+  // ===== 必須項目の入力でエラー状態を解除 =====
+  document.querySelectorAll('.input-group[data-required] input, .input-group[data-required] select').forEach(function(el) {
+    var handler = function() {
+      var g = el.closest('.input-group');
+      var isValid = el.value && (el.tagName === 'SELECT' ? el.value !== '' : parseInt(el.value) > 0);
+      if (!isValid) return;
+      g.classList.remove('has-error');
+      el.classList.remove('input-error');
+
+      if (el.id === 'salary') {
+        // Step 1 のエラーメッセージをクリア
+        var step1Error = document.getElementById('step1-error-msg');
+        if (step1Error.textContent.indexOf('入力してください') >= 0) {
+          step1Error.textContent = '';
+        }
+      } else {
+        // Step 2 のエラーメッセージをクリア
+        var errorMsg = document.getElementById('error-msg');
+        var stillMissing = document.querySelector('.input-group[data-required="rent"].has-error, .input-group[data-required="prefecture"].has-error');
+        if (!stillMissing && errorMsg.textContent.indexOf('入力してください') >= 0) {
+          errorMsg.textContent = '';
+        }
+      }
+    };
+    el.addEventListener('input', handler);
+    el.addEventListener('change', handler);
+  });
 });
 </script>
 </body>
