@@ -1414,6 +1414,96 @@
       .sub-pitch-label { font-size: 0.82rem; }
       .sub-pitch-desc { font-size: 0.68rem; }
       .sub-pitch-item { padding: 14px 8px; }
+
+      /* === Simulator mobile fixes === */
+      .section { padding: 48px 14px; }
+      .sim-layout { gap: 14px; margin-top: 18px; }
+
+      /* Promo panel */
+      .sim-promo { padding: 22px 18px; border-radius: 14px; }
+      .sim-promo-headline { font-size: 1.15rem; line-height: 1.65; }
+      .sim-promo-num { font-size: 1.95rem; line-height: 1.1; }
+      .sim-promo-sub { font-size: 0.9rem; margin-top: 12px; }
+      .sim-promo-note { font-size: 0.72rem; margin-top: 6px; }
+
+      /* Input card */
+      .sim-input-card { padding: 18px 14px; border-radius: 14px; }
+      .step-indicator { gap: 6px; margin-bottom: 16px; }
+      .step-pill { font-size: 0.72rem; padding: 5px 10px 5px 5px; gap: 6px; }
+      .step-pill .step-num { width: 18px; height: 18px; font-size: 0.66rem; }
+      .step-connector { max-width: 20px; }
+      .step-title { font-size: 0.98rem; }
+      .step-subtitle { font-size: 0.74rem; margin-bottom: 14px; }
+      .breakdown-header { margin: 18px 0 10px; padding-top: 14px; font-size: 0.88rem; }
+      .input-group { margin-bottom: 12px; }
+      .input-group label { font-size: 0.8rem; }
+      .input-group input,
+      .input-group select { padding: 11px 12px; }
+      .step-nav { gap: 8px; }
+      .step-nav .step-back-btn { min-width: 78px; padding: 13px 12px; font-size: 0.92rem; }
+      .calc-btn { padding: 14px; font-size: 0.95rem; }
+
+      /* Working-hours card */
+      .wh-card { padding: 10px 12px; }
+      .wh-mode { gap: 4px; margin-bottom: 8px; }
+      .wh-mode-btn { padding: 6px 6px; font-size: 0.72rem; }
+      .wh-checks { gap: 4px 8px; }
+      .wh-check { font-size: 0.78rem; gap: 6px; padding: 4px 0; }
+      .wh-check-label-sub { font-size: 0.62rem; }
+      .wh-result {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+      .wh-result-label { font-size: 0.7rem; }
+      .wh-result-value { font-size: 0.88rem; }
+      .wh-result-value strong { font-size: 1rem; }
+
+      /* Savings callout - results */
+      .savings-callout { padding: 22px 14px; border-radius: 14px; margin: 14px 0; }
+      .savings-toggle { margin-bottom: 14px; }
+      .savings-toggle .toggle-btn { font-size: 0.76rem; padding: 5px 14px; }
+      .savings-row { gap: 12px; }
+      .savings-item .s-label { font-size: 0.72rem; }
+      .savings-item .s-value { font-size: 1.5rem; letter-spacing: -0.03em; }
+      .savings-item .s-unit { font-size: 0.85rem; }
+      .s-value--5year { font-size: 1.7rem; }
+      .savings-divider-h { margin: 10px 0 6px; }
+
+      /* Applied info already stacks at <=600 */
+      .applied-info > div { padding: 12px 14px; }
+      .applied-info-value { font-size: 1.2rem; }
+
+      /* Chart card */
+      .chart-card { padding: 16px 8px; }
+
+      /* Detail table */
+      .detail-card { padding: 16px 12px; border-radius: 14px; }
+      .detail-card table { font-size: 0.78rem; }
+      .detail-card thead th { padding: 6px 4px 8px; font-size: 0.68rem; }
+      .detail-card tbody td { padding: 9px 4px; }
+      .td-label { font-size: 0.74rem; }
+      .row-highlight .td-label { font-size: 0.78rem; }
+      .row-highlight .td-accent { font-size: 0.95rem; }
+
+      .sim-disclaimer { font-size: 0.66rem; padding: 8px 2px 4px; }
+
+      /* Optional/required badges - keep readable */
+      .required-badge,
+      .optional-badge { font-size: 0.6rem; }
+    }
+    @media (max-width: 360px) {
+      .section { padding: 44px 10px; }
+      .sim-input-card { padding: 16px 12px; }
+      .sim-promo { padding: 20px 16px; }
+      .sim-promo-headline { font-size: 1.05rem; }
+      .sim-promo-num { font-size: 1.75rem; }
+      .step-pill { font-size: 0.68rem; padding: 4px 8px 4px 4px; }
+      .step-connector { max-width: 12px; }
+      .savings-item .s-value { font-size: 1.3rem; }
+      .s-value--5year { font-size: 1.5rem; }
+      .wh-mode-btn { font-size: 0.68rem; padding: 5px 4px; }
+      .detail-card table { font-size: 0.72rem; }
     }
     @media (min-width: 800px) {
       .section { padding: 80px 40px; }
