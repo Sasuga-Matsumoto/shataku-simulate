@@ -1689,6 +1689,20 @@
             </div>
 
             <div class="input-group">
+              <label for="insurance"><span class="required-badge">必須</span>加入している健康保険</label>
+              <select id="insurance" name="insurance" autocomplete="off">
+                <option value="kyokai">協会けんぽ（標準）</option>
+                <option value="shika">歯科医師国保（歯科医院）</option>
+              </select>
+            </div>
+
+            <div class="input-group" id="shika-category-group" style="display:none;">
+              <label for="shika-category"><span class="required-badge">必須</span>対象区分</label>
+              <select id="shika-category" name="shika-category" autocomplete="off"></select>
+            </div>
+            <p id="shika-note" style="display:none; margin:-4px 0 4px; font-size:0.8rem; line-height:1.6; color:#3b5bdb;"></p>
+
+            <div class="input-group">
               <label><span class="optional-badge">任意</span>月所定労働時間</label>
               <div class="wh-card">
                 <div class="wh-mode" role="tablist" aria-label="所定労働時間の入力方法">
@@ -2028,6 +2042,36 @@ var REGION_PREFS = [
   { region: '九州・沖縄', prefs: ['福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'] }
 ];
 
+// ===== 歯科医師国保（定額健保）マスター =====
+// 出典: general/output/shika-kokuho-research/00_統合マスター_確定値.md
+// premium = 本人月額（定額・40歳未満相当・給与非連動）
+var SHIKA_TOKYO_RATE = 0.0970; // 東京都歯科健康保険組合（一般保険料 本人+事業主・料率制）
+var SHIKA_PLANS_BY_PREF = {
+  '千葉県': [
+    { key: 'dentist',     label: '勤務医',                   premium: 24800 },
+    { key: 'staff_lic',   label: '技工士・衛生士',           premium: 19800 },
+    { key: 'staff_clerk', label: '助手・事務',               premium: 17800 }
+  ],
+  '神奈川県': [
+    { key: 'dentist', label: '勤務医',                       premium: 29600 },
+    { key: 'staff',   label: '技工士・衛生士・助手・事務',   premium: 21100 }
+  ],
+  '埼玉県': [
+    { key: 'dentist', label: '勤務医',                                     premium: 21900 },
+    { key: 'staff',   label: 'スタッフ（衛生士・技工士・助手・事務）',     premium: 16900 }
+  ]
+};
+// 上記以外の都道府県は全国歯科医師国保の標準額（概算）
+var SHIKA_PLAN_NATIONAL = [
+  { key: 'dentist', label: '勤務医（2種）',                          premium: 25460 },
+  { key: 'staff',   label: 'スタッフ（3種・衛生士/技工士/助手/事務）', premium: 16940 }
+];
+// 区分リスト取得（東京都は料率制＝定額区分なしのため null）
+function getShikaCategories(pref) {
+  if (pref === '東京都') return null;
+  return SHIKA_PLANS_BY_PREF[pref] || SHIKA_PLAN_NATIONAL;
+}
+
 // ===== 標準報酬月額テーブル =====
 var REMUNERATION_TABLE = [
   [58000,0,63000],[68000,63000,73000],[78000,73000,83000],
@@ -2095,11 +2139,14 @@ function calcIncomeTaxBracket(t) {
   if (t <= 39999000) return { rate: 0.40, deduction: 2796000 };
   return { rate: 0.45, deduction: 4796000 };
 }
-function calcScenario(monthlySalary, rent, reductionRatio, healthRate) {
+function calcScenario(monthlySalary, rent, reductionRatio, healthRate, fixedHealthMonthly) {
   var effectiveMonthly = monthlySalary - rent * reductionRatio;
   var annualIncome = effectiveMonthly * 12;
   var stdMonthly = lookupStandardMonthly(effectiveMonthly);
-  var healthMonthly = Math.min(stdMonthly, HEALTH_CAP_MONTHLY) * healthRate * 0.5;
+  // 歯科医師国保（定額）の場合は標準報酬×料率ではなく区分別の固定額を用いる（給与非連動）
+  var healthMonthly = (typeof fixedHealthMonthly === 'number')
+    ? fixedHealthMonthly
+    : Math.min(stdMonthly, HEALTH_CAP_MONTHLY) * healthRate * 0.5;
   var pensionMonthly = Math.min(stdMonthly, PENSION_CAP_MONTHLY) * PENSION_RATE_HALF;
   var childcareMonthly = Math.min(stdMonthly, CHILDCARE_CAP_MONTHLY) * CHILDCARE_RATE_HALF;
   var employmentMonthly = effectiveMonthly * EMPLOYMENT_RATE;
@@ -2132,14 +2179,16 @@ function calcScenario(monthlySalary, rent, reductionRatio, healthRate) {
     realNetMonthly: realNetAnnual / 12
   };
 }
-function calculate(monthlySalary, rent, prefecture, reductionRatio) {
+function calculate(monthlySalary, rent, prefecture, reductionRatio, insurance) {
   if (typeof reductionRatio !== 'number') reductionRatio = MAX_REDUCTION_RATIO;
-  var healthRate = PREFECTURE_RATES[prefecture];
-  var without   = calcScenario(monthlySalary, rent, 0.0, healthRate);
-  var withSystem = calcScenario(monthlySalary, rent, reductionRatio, healthRate);
+  if (!insurance) insurance = { healthRate: PREFECTURE_RATES[prefecture], fixedHealth: null };
+  var healthRate = insurance.healthRate;
+  var fixedHealth = (typeof insurance.fixedHealth === 'number') ? insurance.fixedHealth : null;
+  var without   = calcScenario(monthlySalary, rent, 0.0, healthRate, fixedHealth);
+  var withSystem = calcScenario(monthlySalary, rent, reductionRatio, healthRate, fixedHealth);
 
   var DELTA = 30000;
-  var withoutPlus = calcScenario(monthlySalary + DELTA, rent, 0.0, healthRate);
+  var withoutPlus = calcScenario(monthlySalary + DELTA, rent, 0.0, healthRate, fixedHealth);
   var reflectionRate = (withoutPlus.realNetMonthly - without.realNetMonthly) / DELTA;
 
   var monthlyIncrease = Math.round(withSystem.realNetMonthly - without.realNetMonthly);
@@ -2505,7 +2554,26 @@ function runCalculation() {
     return;
   }
 
-  var result = calculate(salary, rent, pref, ratioInfo.ratio);
+  // 加入保険の解決（協会けんぽ / 歯科国保=定額 / 東京都歯科健保=料率）
+  var insurance = document.getElementById('insurance').value;
+  var insCfg;
+  if (insurance === 'shika') {
+    if (pref === '東京都') {
+      // 東京都は定額の歯科国保が無く、東京都歯科健保（料率制）として計算
+      insCfg = { healthRate: SHIKA_TOKYO_RATE, fixedHealth: null };
+    } else {
+      var cats = getShikaCategories(pref);
+      var catKey = document.getElementById('shika-category').value;
+      var cat = null;
+      for (var ci = 0; ci < cats.length; ci++) { if (cats[ci].key === catKey) { cat = cats[ci]; break; } }
+      if (!cat) cat = cats[0];
+      insCfg = { healthRate: PREFECTURE_RATES[pref], fixedHealth: cat.premium };
+    }
+  } else {
+    insCfg = { healthRate: PREFECTURE_RATES[pref], fixedHealth: null };
+  }
+
+  var result = calculate(salary, rent, pref, ratioInfo.ratio, insCfg);
 
   var callout = document.querySelector('.savings-callout');
   callout.dataset.net   = JSON.stringify([result.monthlyIncrease, result.annualIncrease, result.fiveYearIncrease]);
@@ -2599,6 +2667,45 @@ document.addEventListener('DOMContentLoaded', function() {
     select.appendChild(group);
   });
   document.getElementById('calc-btn').addEventListener('click', runCalculation);
+
+  // ===== 加入保険（協会けんぽ / 歯科医師国保）の区分select 出し分け =====
+  function updateInsuranceUI() {
+    var insurance = document.getElementById('insurance').value;
+    var pref = document.getElementById('prefecture').value;
+    var catGroup = document.getElementById('shika-category-group');
+    var catSelect = document.getElementById('shika-category');
+    var noteEl = document.getElementById('shika-note');
+    if (insurance !== 'shika') {
+      catGroup.style.display = 'none';
+      noteEl.style.display = 'none';
+      return;
+    }
+    var cats = getShikaCategories(pref);
+    if (!cats) {
+      // 東京都 = 東京都歯科健康保険組合（料率制・区分なし）
+      catGroup.style.display = 'none';
+      noteEl.style.display = 'block';
+      noteEl.textContent = '※ 東京都は東京都歯科健康保険組合（料率制）として計算します。健康保険料は標準報酬に連動します。';
+      return;
+    }
+    var prev = catSelect.value;
+    var hasPrev = false;
+    catSelect.innerHTML = '';
+    cats.forEach(function(c) {
+      var opt = document.createElement('option');
+      opt.value = c.key;
+      opt.textContent = c.label + '（月額 ' + c.premium.toLocaleString('ja-JP') + '円）';
+      if (c.key === prev) hasPrev = true;
+      catSelect.appendChild(opt);
+    });
+    if (hasPrev) catSelect.value = prev;
+    catGroup.style.display = '';
+    noteEl.style.display = 'block';
+    noteEl.textContent = '※ 歯科医師国保は健康保険料が定額のため、手取りアップは厚生年金・税の軽減が中心です。';
+  }
+  document.getElementById('insurance').addEventListener('change', updateInsuranceUI);
+  document.getElementById('prefecture').addEventListener('change', updateInsuranceUI);
+  updateInsuranceUI();
 
   // ===== ステップ遷移 =====
   function scrollToFormTop() {
