@@ -1689,20 +1689,6 @@
             </div>
 
             <div class="input-group">
-              <label for="insurance"><span class="required-badge">必須</span>加入している健康保険</label>
-              <select id="insurance" name="insurance" autocomplete="off">
-                <option value="kyokai">協会けんぽ（標準）</option>
-                <option value="shika">歯科医師国保（歯科医院）</option>
-              </select>
-            </div>
-
-            <div class="input-group" id="shika-category-group" style="display:none;">
-              <label for="shika-category"><span class="required-badge">必須</span>対象区分</label>
-              <select id="shika-category" name="shika-category" autocomplete="off"></select>
-            </div>
-            <p id="shika-note" style="display:none; margin:-4px 0 4px; font-size:0.8rem; line-height:1.6; color:#3b5bdb;"></p>
-
-            <div class="input-group">
               <label><span class="optional-badge">任意</span>月所定労働時間</label>
               <div class="wh-card">
                 <div class="wh-mode" role="tablist" aria-label="所定労働時間の入力方法">
@@ -1744,6 +1730,29 @@
                     年間休日 <strong id="wh-annual-days">121</strong>日 / 月所定 <strong id="wh-monthly-hours">163</strong>時間
                   </span>
                 </div>
+              </div>
+            </div>
+
+            <!-- 任意（普通は使わない）: 歯科医師国保など別の健康保険で試算 -->
+            <div class="input-group">
+              <button type="button" id="ins-adv-toggle" aria-expanded="false"
+                style="display:flex;align-items:center;gap:6px;width:100%;background:none;border:none;padding:6px 0;cursor:pointer;color:#64748b;font-size:0.85rem;font-weight:600;">
+                <svg id="ins-adv-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .2s ease;"><path d="M9 18l6-6-6-6"/></svg>
+                歯科医師国保など、別の健康保険で試算する（任意）
+              </button>
+              <div id="ins-adv-panel" style="display:none;margin-top:10px;">
+                <div class="input-group">
+                  <label for="insurance">加入している健康保険</label>
+                  <select id="insurance" name="insurance" autocomplete="off">
+                    <option value="kyokai">協会けんぽ（標準）</option>
+                    <option value="shika">歯科医師国保（歯科医院）</option>
+                  </select>
+                </div>
+                <div class="input-group" id="shika-category-group" style="display:none;">
+                  <label for="shika-category">対象区分</label>
+                  <select id="shika-category" name="shika-category" autocomplete="off"></select>
+                </div>
+                <p id="shika-note" style="display:none;margin:-4px 0 4px;font-size:0.8rem;line-height:1.6;color:#3b5bdb;"></p>
               </div>
             </div>
 
@@ -2706,6 +2715,16 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('insurance').addEventListener('change', updateInsuranceUI);
   document.getElementById('prefecture').addEventListener('change', updateInsuranceUI);
   updateInsuranceUI();
+
+  // 任意トグル: 「別の健康保険で試算」パネルの開閉
+  document.getElementById('ins-adv-toggle').addEventListener('click', function() {
+    var panel = document.getElementById('ins-adv-panel');
+    var chev = document.getElementById('ins-adv-chevron');
+    var open = (panel.style.display === 'none' || panel.style.display === '');
+    panel.style.display = open ? 'block' : 'none';
+    this.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (chev) chev.style.transform = open ? 'rotate(90deg)' : '';
+  });
 
   // ===== ステップ遷移 =====
   function scrollToFormTop() {
